@@ -32,20 +32,6 @@ public class Combat {
 			//random is random?
 			//responsive is responsive?
 	public void runCombat() {
-		//System.out.println("Fairy: \uD83E\uDDDA\u200D\u2642\u2B05\uFE0F");
-		//System.out.println("Fairy: \uD83E\uDDDA\u200D\u2642\u27A1\uFE0F");
-		//System.out.println("Genie: \uD83E\uDDDE\u200D\u2642");
-		//System.out.println("Zombie: \uD83E\uDDDA\u200D\u2642");
-		//System.out.println("Wizard: \uD83E\uDDD9\u200D\u2642");
-		//System.out.println("Skeleton: \uD83E\uDDDA\u200D\u2642");
-		//System.out.println("Face Left: \u1F3F3\u200D\u2B05\uFE0F");
-		//System.out.println("Face Right: \u1F3F3\u200D\u27A1\uFE0F");
-		//System.out.println("Fairy: \uD83E\uDDDA\u200D\u2642");
-		//System.out.println("Fairy: \uD83E\uDDDA\u200D\u2642");
-		//System.out.println("Fencing Left: \uD83E\uDD3A\u2B05\uFE0F");
-		//System.out.println("Fencing Right: \uD83E\uDD3A\u27A1\uFE0F");
-		//System.out.println("Ninja: \uD83E\uDD77\uD83C\uDFFC");
-		//System.out.println("Vampire: \uD83E\uDDDB\u200D\u2640");
 
 
 
@@ -60,6 +46,7 @@ public class Combat {
 		for (int i = 1; i < numOfLines; i++) {
 			goToStartOfPrev += "\033[F";
 		}
+
 		boolean firstLoop = true;
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
@@ -86,7 +73,26 @@ public class Combat {
 			//E.g. one time its enemy first, then player1, then enemy.
 			//The order should be the same, always: player1, then enemy.
 
+			handleChosenOption(usersOption, enemysOption);
 
+		}
+
+
+		System.out.println();
+		printStage();
+		System.out.println();
+
+		if (player1.getHealth() > 0) { //player1 wins only if they still have health
+			System.out.println("You WIN!");
+		} else {
+			System.out.println("You lose!");
+		}
+
+		System.out.println();
+
+	}
+
+	public void handleChosenOption (String usersOption, int enemysOption) {
 			//set blocks
 			if (enemysOption == 1) {
 				enemy.block();
@@ -118,24 +124,7 @@ public class Combat {
 			//unblock
 			enemy.unBlock();
 			player1.unBlock();
-
-		}
-
-
-		System.out.println();
-		printStage();
-		System.out.println();
-
-		if (player1.getHealth() > 0) { //player1 wins only if they still have health
-			System.out.println("You WIN!");
-		} else {
-			System.out.println("You lose!");
-		}
-
-		System.out.println();
-
 	}
-
 	public void printStage() {
 		String playerHealth = healthIcon + player1.getHealth();
 		String playerMana = manaIcon + player1.getMana();
