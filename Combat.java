@@ -3,6 +3,11 @@ public class Combat {
 	Player1 player1;
 	Enemy enemy;
 
+	String p1Avatar = "\uD83E\uDDD9\u200D\u2642";
+	String enemyAvatar = "\uD83E\uDDDE\u200D\u2642";
+	String healthIcon = "\uD83E\uDE78";
+	String manaIcon = "\uD83D\uDCA7";
+
 	public Combat (Player1 player1, Enemy enemy) {
 		this.player1 = player1;
 		this.enemy = enemy;
@@ -37,12 +42,33 @@ public class Combat {
 		//System.out.println("Ninja: \uD83E\uDD77\uD83C\uDFFC");
 		//System.out.println("Vampire: \uD83E\uDDDB\u200D\u2640");
 
-		String p1Avatar = "\uD83E\uDDD9\u200D\u2642";
-		String enemyAvatar = "\uD83E\uDDDE\u200D\u2642";
 
-		//while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
+		printStage();
+
+		//TEST
+		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
+		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 			
-		//}
+		}
+	}
+
+	public void printStage() {
+		String playerHealth = healthIcon + player1.getHealth();
+		String playerMana = manaIcon + player1.getMana();
+		String playerStage = playerHealth + playerMana + " " + p1Avatar;
+
+		String enemyHealth = enemy.getHealth() + healthIcon;
+		String enemyMana = enemy.getMana() + manaIcon ;
+		String enemyStage = enemyAvatar + " " + enemyMana + enemyHealth + " ";
+		
+		String stage = playerStage + "     " + enemyStage;
+		
+		System.out.println(stage);
+
+
+	}
+
+	public void printOptions() {
 	}
 	
 }
