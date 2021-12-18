@@ -1,0 +1,8 @@
+#ignore all compiled files
+**.class
+#ignore the compiledCode folder
+CompiledCode
+#ignore all swp files
+**.swp
+#ignore macOS .DS_Store file
+.DS_Store
