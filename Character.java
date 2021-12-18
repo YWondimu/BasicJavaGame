@@ -48,7 +48,7 @@ public abstract class Character {
 	//other methods
 	public void attack(Character target, int amount, String attackType) {
 		int health = target.getHealth();
-		target.setHealth(health-amount);
+		target.setHealthTo(health-amount);
 	}
 
 	public void healSelfBy(int amount) {

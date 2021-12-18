@@ -9,5 +9,12 @@ public class RunCombat {
 
 		//combat.run();
 
+		Player1 player1 = new Player1(5, 5);
+		Enemy enemy = new Enemy(5,5);
+
+		Combat testCombat = new Combat(player1, enemy);
+		testCombat.runCombat();
 	}
+
+
 }
