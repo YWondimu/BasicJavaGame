@@ -47,12 +47,16 @@ public abstract class Character {
 
 	//other methods
 	public void attack(Character target, int amount, String attackType) {
-		if (!target.isBlocking() && this.getMana() > 0) { //attack will be successful only if player1 has mana, and if the target is not blocking
-			int health = target.getHealth();
-			target.setHealthTo(health-amount);
+		if (this.getMana() > 0) { //mana lost regardless of whether attack is successful or not
 			int mana = this.getMana();
 			this.setManaTo(mana-amount);
+			
+			if (!target.isBlocking()) { //attack will be successful only if player1 has mana, and if the target is not blocking
+				int health = target.getHealth();
+				target.setHealthTo(health-amount);
+			}
 		}
+			
 	}
 
 	public void healSelfBy(int amount) {

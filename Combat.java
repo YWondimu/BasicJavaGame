@@ -73,23 +73,29 @@ public class Combat {
 			//set blocks
 			if (enemysOption == 1) {
 				enemy.block();
+				System.out.println("Enemy blocked!");
 			}
 			if (usersOption.equals("d")) {
 				player1.block();
+				System.out.println("You blocked!");
 			}
 			//attack
 			if (enemysOption == 2) {
 				enemy.attack(player1, 1, "regular");
+				System.out.println("Enemy attacked!");
 			}
 			if (usersOption.equals("a")) {
 				player1.attack(enemy, 1, "regular");
+				System.out.println("You attacked!");
 			}
 			//recharge mana
 			if (enemysOption == 3) {
 				enemy.rechargeManaBy(1);
+				System.out.println("Enemy recharged mana!");
 			}
 			if (usersOption.equals("s")) {
 				player1.rechargeManaBy(1);
+				System.out.println("You recharged mana!");
 			}
 			//unblock
 			enemy.unBlock();
@@ -101,6 +107,12 @@ public class Combat {
 		System.out.println();
 		printStage();
 		System.out.println();
+
+		if (player1.getHealth() > 0) { //player1 wins only if they still have health
+			System.out.println("You WIN!");
+		} else {
+			System.out.println("You lose!");
+		}
 
 	}
 
