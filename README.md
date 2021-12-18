@@ -10,4 +10,4 @@ The game is run in the terminal, and might or might not include a GUI... It's a 
 
 Here's a screenshot to give an idea of how the game will look, for now:
 
-![screenshot of game in action](/PicturesForReadme/ScreenShot-Javagame.png "Screenshot of Game")
+![screenshot of game in action](/PicturesForReadme/ScreenShot-JavaGame.png "Screenshot of Game")
