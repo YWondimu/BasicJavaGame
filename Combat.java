@@ -68,7 +68,10 @@ public class Combat {
 
 	}
 
-	public void printOptions() {
+	public void printMenu() {
 	}
+
+	//add broken heart for damage
+	//add fire and shield for attack and block, and add water thing for mana regen
 	
 }
