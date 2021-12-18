@@ -54,9 +54,21 @@ public class Combat {
 		String usersOption;
 		int enemysOption;
 		Random rand = new Random();
+		String goToStartOfPrev = "";
+		int numOfLines;
+		numOfLines = 8;
+		for (int i = 1; i < numOfLines; i++) {
+			goToStartOfPrev += "\033[F";
+		}
+		boolean firstLoop = true;
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
-			System.out.println();
+			if (firstLoop) {
+				firstLoop = false;
+				System.out.println();
+			} else {
+				System.out.print(goToStartOfPrev);
+			}
 			printStage();
 			System.out.println();
 			printMenu();
@@ -70,32 +82,38 @@ public class Combat {
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
+			//TODO: The order in which action status prints switches
+			//E.g. one time its enemy first, then player1, then enemy.
+			//The order should be the same, always: player1, then enemy.
+
+
 			//set blocks
 			if (enemysOption == 1) {
 				enemy.block();
-				System.out.println("Enemy blocked!");
+				printActionStatus("enemy", "block");
 			}
 			if (usersOption.equals("d")) {
 				player1.block();
-				System.out.println("You blocked!");
+				printActionStatus("player1", "block");
 			}
+			
 			//attack
 			if (enemysOption == 2) {
 				enemy.attack(player1, 1, "regular");
-				System.out.println("Enemy attacked!");
+				printActionStatus("enemy", "attack");
 			}
 			if (usersOption.equals("a")) {
 				player1.attack(enemy, 1, "regular");
-				System.out.println("You attacked!");
+				printActionStatus("player1", "attack");
 			}
 			//recharge mana
 			if (enemysOption == 3) {
 				enemy.rechargeManaBy(1);
-				System.out.println("Enemy recharged mana!");
+				printActionStatus("enemy", "recharge");
 			}
 			if (usersOption.equals("s")) {
 				player1.rechargeManaBy(1);
-				System.out.println("You recharged mana!");
+				printActionStatus("player1", "recharge");
 			}
 			//unblock
 			enemy.unBlock();
@@ -113,6 +131,8 @@ public class Combat {
 		} else {
 			System.out.println("You lose!");
 		}
+
+		System.out.println();
 
 	}
 
@@ -137,7 +157,43 @@ public class Combat {
 		System.out.println(menu);
 	}
 
+	public void printActionStatus (String who, String what) {
+		String output = "";
+		String firstHalf = "";
+
+		if (who == "player1") {
+			firstHalf = p1Avatar + ": You ";
+		} else if (who == "enemy") {
+			firstHalf = enemyAvatar + ": Enemy ";
+		}
+
+		if (what == "attack") {
+			output = firstHalf + "attacked!"; 
+		} else if (what == "block") {
+			output = firstHalf + "blocked!"; 
+		} else if (what == "recharge") {
+			output = firstHalf + "recharged mana!"; 
+		}
+
+		//add 10 spaces to end of output
+		output += "          ";
+		System.out.println(output);
+	}
 	//add broken heart for damage
 	//add fire and shield for attack and block, and add water thing for mana regen
-	
+
+
+	//IDEAS
+		//animation
+		//shoot more than one fireball at a time
+		//big fireball that uses 2 mana and goes through shield
+		//reflect to adversary, uses mana -- this is a fun idea haha
+		//enemy strategies
+			//reasonable, agressive when your life is low, defensive when their life is low
+			//defensive
+			//aggressive
+			//berserk
+				//aggressive when their life is low
+			//enemy strategy picked at random? or chosen by player?
+			//chaotic - random choice of attack, charge, or defend
 }
