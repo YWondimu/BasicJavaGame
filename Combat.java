@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.Random;
+
 public class Combat {
 
 	Player1 player1;
@@ -7,6 +10,8 @@ public class Combat {
 	String enemyAvatar = "\uD83E\uDDDE\u200D\u2642";
 	String healthIcon = "\uD83E\uDE78";
 	String manaIcon = "\uD83D\uDCA7";
+
+	Scanner scan = new Scanner(System.in);
 
 	public Combat (Player1 player1, Enemy enemy) {
 		this.player1 = player1;
@@ -43,13 +48,60 @@ public class Combat {
 		//System.out.println("Vampire: \uD83E\uDDDB\u200D\u2640");
 
 
-		printStage();
 
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
+		String usersOption;
+		int enemysOption;
+		Random rand = new Random();
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
-			
+
+			System.out.println();
+			printStage();
+			System.out.println();
+			printMenu();
+			System.out.println();
+
+ 			usersOption = scan.nextLine();
+		//use carriage returns to clear command line when moving on to next round
+			//get enemy's option
+			enemysOption = rand.nextInt(3)+1; //get random number from 1 to 3
+
+			//TEST
+			//System.out.println("usersOption: " + usersOption);
+
+			//set blocks
+			if (enemysOption == 1) {
+				enemy.block();
+			}
+			if (usersOption.equals("d")) {
+				player1.block();
+			}
+			//attack
+			if (enemysOption == 2) {
+				enemy.attack(player1, 1, "regular");
+			}
+			if (usersOption.equals("a")) {
+				player1.attack(enemy, 1, "regular");
+			}
+			//recharge mana
+			if (enemysOption == 3) {
+				enemy.rechargeManaBy(1);
+			}
+			if (usersOption.equals("s")) {
+				player1.rechargeManaBy(1);
+			}
+			//unblock
+			enemy.unBlock();
+			player1.unBlock();
+
 		}
+
+
+		System.out.println();
+		printStage();
+		System.out.println();
+
 	}
 
 	public void printStage() {
@@ -69,6 +121,8 @@ public class Combat {
 	}
 
 	public void printMenu() {
+		String menu = "a: attack | s: charge mana | d: defend";
+		System.out.println(menu);
 	}
 
 	//add broken heart for damage
