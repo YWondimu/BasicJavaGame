@@ -228,4 +228,9 @@ public class Combat {
 				//aggressive when their life is low
 			//enemy strategy picked at random? or chosen by player?
 			//chaotic - random choice of attack, charge, or defend
+		//action status should have color and/or emojis so that it is more clear what happened
+
+	//TODO:fix bugs
+		//there are some bugs that delay change or appearance of change to health and mana
+		//find and fix
 }
