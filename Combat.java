@@ -67,6 +67,7 @@ public class Combat {
 			System.out.println();
 			printMenu();
 			System.out.println();
+			System.out.print(" \r");
 
 			//get chosenOption for player1
  			usersOption = scan.nextLine();
@@ -230,7 +231,9 @@ public class Combat {
 			//chaotic - random choice of attack, charge, or defend
 		//action status should have color and/or emojis so that it is more clear what happened
 
-	//TODO:fix bugs
+	//TODO: fix bugs that delays or changes health/mana
 		//there are some bugs that delay change or appearance of change to health and mana
 		//find and fix
+	//TODO: fix error handling
+		//need to make sure that only correct input is accepted
 }
