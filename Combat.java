@@ -133,7 +133,7 @@ public class Combat {
 	public void handleChosenOption (int enemysOption) {
 			//no actions yet
 			if (enemysOption == 0) {
-				printActionStatus("enemy", "no action yet");
+				printActionStatus("enemy", "n/a");
 			}
 			//set blocks
 			if (enemysOption == 1) {
@@ -203,10 +203,12 @@ public class Combat {
 			output = firstHalf + "WON!";
 		} else if (what == "lost") {
 			output = firstHalf + "lost.";
+		} else if (what == "n/a") {
+			output = firstHalf + "... waiting for action.";
 		}
 
 		//add 10 spaces to end of output
-		output += "          ";
+		output += "                    ";
 		System.out.println(output);
 	}
 	//add broken heart for damage
