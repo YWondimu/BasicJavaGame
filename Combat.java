@@ -69,11 +69,8 @@ public class Combat {
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
-			//TODO: The order in which action status prints switches
-			//E.g. one time its enemy first, then player1, then enemy.
-			//The order should be the same, always: player1, then enemy.
-
-			handleChosenOption(usersOption, enemysOption);
+			handleChosenOption(usersOption);
+			handleChosenOption(enemysOption);
 
 		}
 
@@ -92,39 +89,45 @@ public class Combat {
 
 	}
 
-	public void handleChosenOption (String usersOption, int enemysOption) {
+	public void handleChosenOption (String usersOption) {
+			//set blocks
+			if (usersOption.equals("d")) {
+				player1.block();
+				printActionStatus("player1", "block");
+			}
+			//attack
+			if (usersOption.equals("a")) {
+				player1.attack(enemy, 1, "regular");
+				printActionStatus("player1", "attack");
+			}
+			//recharge mana
+			if (usersOption.equals("s")) {
+				player1.rechargeManaBy(1);
+				printActionStatus("player1", "recharge");
+			}
+			//unblock
+			player1.unBlock();
+	}
+	public void handleChosenOption (int enemysOption) {
 			//set blocks
 			if (enemysOption == 1) {
 				enemy.block();
 				printActionStatus("enemy", "block");
 			}
-			if (usersOption.equals("d")) {
-				player1.block();
-				printActionStatus("player1", "block");
-			}
-			
 			//attack
 			if (enemysOption == 2) {
 				enemy.attack(player1, 1, "regular");
 				printActionStatus("enemy", "attack");
-			}
-			if (usersOption.equals("a")) {
-				player1.attack(enemy, 1, "regular");
-				printActionStatus("player1", "attack");
 			}
 			//recharge mana
 			if (enemysOption == 3) {
 				enemy.rechargeManaBy(1);
 				printActionStatus("enemy", "recharge");
 			}
-			if (usersOption.equals("s")) {
-				player1.rechargeManaBy(1);
-				printActionStatus("player1", "recharge");
-			}
 			//unblock
 			enemy.unBlock();
-			player1.unBlock();
 	}
+
 	public void printStage() {
 		String playerHealth = healthIcon + player1.getHealth();
 		String playerMana = manaIcon + player1.getMana();
