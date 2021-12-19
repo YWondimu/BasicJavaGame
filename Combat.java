@@ -80,16 +80,21 @@ public class Combat {
 		}
 
 
-		System.out.println();
-		printStage();
-		System.out.println();
-
 		if (player1.getHealth() > 0) { //player1 wins only if they still have health
-			System.out.println("You WIN!");
+			usersOption = "won";
+			enemysOption = 5;
 		} else {
-			System.out.println("You lose!");
+			usersOption = "lost";
+			enemysOption = 4;
 		}
 
+		System.out.print(goToStartOfPrev);
+		printStage();
+		System.out.println();
+		handleChosenOption(usersOption);
+		handleChosenOption(enemysOption);
+		System.out.println();
+		printMenu();
 		System.out.println();
 
 	}
@@ -114,6 +119,14 @@ public class Combat {
 				player1.rechargeManaBy(1);
 				printActionStatus("player1", "recharge");
 			}
+			//user has won
+			if (usersOption.equals("won")) {
+				printActionStatus("player1", "won");
+			}
+			//user has lost
+			if (usersOption.equals("lost")) {
+				printActionStatus("player1", "lost");
+			}
 			//unblock
 			player1.unBlock();
 	}
@@ -136,6 +149,14 @@ public class Combat {
 			if (enemysOption == 3) {
 				enemy.rechargeManaBy(1);
 				printActionStatus("enemy", "recharge");
+			}
+			//user has won
+			if (enemysOption == 4) {
+				printActionStatus("enemy", "won");
+			}
+			//user has lost
+			if (enemysOption == 5) {
+				printActionStatus("enemy", "lost");
 			}
 			//unblock
 			enemy.unBlock();
@@ -178,6 +199,10 @@ public class Combat {
 			output = firstHalf + "blocked!"; 
 		} else if (what == "recharge") {
 			output = firstHalf + "recharged mana!"; 
+		} else if (what == "won") {
+			output = firstHalf + "WON!";
+		} else if (what == "lost") {
+			output = firstHalf + "lost.";
 		}
 
 		//add 10 spaces to end of output
