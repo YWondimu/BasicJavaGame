@@ -37,12 +37,12 @@ public class Combat {
 
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
-		String usersOption;
-		int enemysOption;
+		String usersOption = "n/a";
+		int enemysOption = 0;
 		Random rand = new Random();
 		String goToStartOfPrev = "";
 		int numOfLines;
-		numOfLines = 8;
+		numOfLines = 9;
 		for (int i = 1; i < numOfLines; i++) {
 			goToStartOfPrev += "\033[F";
 		}
@@ -50,27 +50,32 @@ public class Combat {
 		boolean firstLoop = true;
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
+			//reset cursor
+			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
+			//The firstLoop and the goToStartOfPrev variables are not accessible.
 			if (firstLoop) {
 				firstLoop = false;
 				System.out.println();
 			} else {
 				System.out.print(goToStartOfPrev);
 			}
+
 			printStage();
+			System.out.println();
+			handleChosenOption(usersOption);
+			handleChosenOption(enemysOption);
 			System.out.println();
 			printMenu();
 			System.out.println();
 
+			//get chosenOption for player1
  			usersOption = scan.nextLine();
-		//use carriage returns to clear command line when moving on to next round
-			//get enemy's option
+			//get chosenOption for enemy
 			enemysOption = rand.nextInt(3)+1; //get random number from 1 to 3
 
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
-			handleChosenOption(usersOption);
-			handleChosenOption(enemysOption);
 
 		}
 
@@ -90,6 +95,10 @@ public class Combat {
 	}
 
 	public void handleChosenOption (String usersOption) {
+			//no actions yet
+			if (usersOption.equals("n/a")) {
+				printActionStatus("player1", "n/a");
+			}
 			//set blocks
 			if (usersOption.equals("d")) {
 				player1.block();
@@ -109,6 +118,10 @@ public class Combat {
 			player1.unBlock();
 	}
 	public void handleChosenOption (int enemysOption) {
+			//no actions yet
+			if (enemysOption == 0) {
+				printActionStatus("enemy", "no action yet");
+			}
 			//set blocks
 			if (enemysOption == 1) {
 				enemy.block();
