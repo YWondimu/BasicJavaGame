@@ -6,12 +6,12 @@ public class Combat {
 	Player1 player1;
 	Enemy enemy;
 
+	Scanner scan = new Scanner(System.in);
+
 	String p1Avatar = "\uD83E\uDDD9\u200D\u2642";
 	String enemyAvatar = "\uD83E\uDDDE\u200D\u2642";
 	String healthIcon = "\uD83E\uDE78";
 	String manaIcon = "\uD83D\uDCA7";
-
-	Scanner scan = new Scanner(System.in);
 
 	public Combat (Player1 player1, Enemy enemy) {
 		this.player1 = player1;
@@ -31,6 +31,7 @@ public class Combat {
 		//other possible types
 			//random is random?
 			//responsive is responsive?
+
 	public void runCombat() {
 
 
@@ -46,6 +47,7 @@ public class Combat {
 		for (int i = 1; i < numOfLines; i++) {
 			goToStartOfPrev += "\033[F";
 		}
+		String firstLine;
 
 		boolean firstLoop = true;
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
@@ -55,24 +57,26 @@ public class Combat {
 			//The firstLoop and the goToStartOfPrev variables are not accessible.
 			if (firstLoop) {
 				firstLoop = false;
-				System.out.println();
+				firstLine = "\n";
+				//System.out.println();
 			} else {
-				System.out.print(goToStartOfPrev);
+				firstLine = goToStartOfPrev;
+				//System.out.print(goToStartOfPrev);
 			}
 
-			printStage();
-			System.out.println();
-			handleChosenOption(usersOption);
-			handleChosenOption(enemysOption);
-			System.out.println();
-			printMenu();
-			System.out.println();
-			System.out.print(" \r");
+			System.out.print(firstLine); 		//first line
+			printStage();				//stage, with icons
+			System.out.println();			//new line
+			handleChosenOption(usersOption);	//action status for player1
+			handleChosenOption(enemysOption);	//action status for enemy
+			System.out.println();			//new line
+			printMenu();				//menu
+			System.out.println();			//new line
+			System.out.print(" \r");		//erase userss previous input
 
-			//get chosenOption for player1
- 			usersOption = scan.nextLine();
-			//get chosenOption for enemy
-			enemysOption = rand.nextInt(3)+1; //get random number from 1 to 3
+ 			usersOption = scan.nextLine();		//get chosenOption for player1
+			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy
+								//get random number from 1 to 3
 
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
@@ -89,7 +93,7 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-		System.out.print(goToStartOfPrev);
+		System.out.print(firstLine); 		//first line
 		printStage();
 		System.out.println();
 		handleChosenOption(usersOption);

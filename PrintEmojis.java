@@ -14,5 +14,6 @@ public class PrintEmojis {
 		System.out.println("Fencing Right: \uD83E\uDD3A\u27A1\uFE0F");
 		System.out.println("Ninja: \uD83E\uDD77\uD83C\uDFFC");
 		System.out.println("Vampire: \uD83E\uDDDB\u200D\u2640");
+		System.out.println("Broken Heart: \uD83D\uDC94");
 	}
 }
