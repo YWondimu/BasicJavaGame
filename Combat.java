@@ -41,51 +41,39 @@ public class Combat {
 		String usersOption = "n/a";
 		int enemysOption = 0;
 		Random rand = new Random();
-		String goToStartOfPrev = "";
-		int numOfLines;
-		numOfLines = 9;
-		for (int i = 1; i < numOfLines; i++) {
-			goToStartOfPrev += "\033[F";
-		}
 		String firstLine;
 
 		boolean firstLoop = true;
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
-			//reset cursor
-			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
-			//The firstLoop and the goToStartOfPrev variables are not accessible.
-			if (firstLoop) {
-				firstLoop = false;
-				firstLine = "\n";
-				//System.out.println();
-			} else {
-				firstLine = goToStartOfPrev;
-				//System.out.print(goToStartOfPrev);
-			}
-
-			System.out.print(firstLine); 		//first line
-			printStage();				//stage, with icons
-			System.out.println();			//new line
-			handleChosenOption(usersOption);	//action status for player1
-			handleChosenOption(enemysOption);	//action status for enemy
-			System.out.println();			//new line
-			printMenu();				//menu
-			System.out.println();			//new line
-			System.out.print(" \r");		//erase userss previous input
-
- 			usersOption = scan.nextLine();		//get chosenOption for player1
-			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy
-								//get random number from 1 to 3
 
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
 			//get info
-				//input
-				//modify p1 and enemy characters based on input
+ 			usersOption = scan.nextLine();		//get chosenOption for player1
+			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
+
+			//modify p1 and enemy objects based on input
+			carryOutAction(usersOption);
+			carryOutAction(enemysOption);
 	
+			//reset cursor
+			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
+			//The firstLoop and the goToStartOfPrev variables are not accessible.
+			//DONE: I changed the if statements into a function
+			firstLine = getFirstLine(firstLoop);
+
 			//print info
+			System.out.print(firstLine); 		//first line
+			printStage();				//stage, with icons
+			System.out.println();			//new line
+			determineAndPrint(usersOption);	//action status for player1
+			determineAndPrint(enemysOption);	//action status for enemy
+			System.out.println();			//new line
+			printMenu();				//menu
+			System.out.println();			//new line
+			System.out.print(" \r");		//erase userss previous input
 
 		}
 
@@ -101,12 +89,32 @@ public class Combat {
 		System.out.print(firstLine); 		//first line
 		printStage();
 		System.out.println();
-		handleChosenOption(usersOption);
-		handleChosenOption(enemysOption);
+		determineAndPrint(usersOption);
+		determineAndPrint(enemysOption);
 		System.out.println();
 		printMenu();
 		System.out.println();
 
+	}
+
+	public String getFirstLine(boolean firstLoop) {
+
+		String goToStartOfPrev = "";
+		int numOfLines;
+		numOfLines = 9;
+		for (int i = 1; i < numOfLines; i++) {
+			goToStartOfPrev += "\033[F";
+		}
+		String firstLine;
+
+		if (firstLoop) {
+			firstLoop = false;
+			firstLine = "\n";
+		} else {
+			firstLine = goToStartOfPrev;
+		}
+		
+		return firstLine;
 	}
 
 	public void carryOutAction (String usersOption) {
@@ -165,7 +173,7 @@ public class Combat {
 			//unblock
 			enemy.unBlock();
 	}
-	public void determineOptionAndPrint (String usersOption) {
+	public void determineAndPrint (String usersOption) {
 			//no actions yet
 			if (usersOption.equals("n/a")) {
 				printActionStatus("player1", "n/a");
@@ -191,7 +199,7 @@ public class Combat {
 				printActionStatus("player1", "lost");
 			}
 	}
-	public void determineOptionAndPrint (int enemysOption) {
+	public void determineAndPrint (int enemysOption) {
 			//no actions yet
 			if (enemysOption == 0) {
 				printActionStatus("enemy", "n/a");
