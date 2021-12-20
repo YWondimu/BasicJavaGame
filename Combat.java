@@ -81,6 +81,11 @@ public class Combat {
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
+			//get info
+				//input
+				//modify p1 and enemy characters based on input
+	
+			//print info
 
 		}
 
@@ -104,24 +109,77 @@ public class Combat {
 
 	}
 
-	public void handleChosenOption (String usersOption) {
+	public void carryOutAction (String usersOption) {
+			//no actions yet
+			if (usersOption.equals("n/a")) {
+				//TODO: Delete if this if statement is useless
+			}
+			//set blocks
+			if (usersOption.equals("d")) {
+				player1.block();
+			}
+			//attack
+			if (usersOption.equals("a")) {
+				player1.attack(enemy, 1, "regular");
+			}
+			//recharge mana
+			if (usersOption.equals("s")) {
+				player1.rechargeManaBy(1);
+			}
+			//user has won
+			if (usersOption.equals("won")) {
+				//TODO: Delete if this if statement is useless
+			}
+			//user has lost
+			if (usersOption.equals("lost")) {
+				//TODO: Delete if this if statement is useless
+			}
+			//unblock
+			player1.unBlock();
+	}
+	public void carryOutAction (int enemysOption) {
+			//no actions yet
+			if (enemysOption == 0) {
+				//TODO: Delete if this if statement is useless
+			}
+			//set blocks
+			if (enemysOption == 1) {
+				enemy.block();
+			}
+			//attack
+			if (enemysOption == 2) {
+				enemy.attack(player1, 1, "regular");
+			}
+			//recharge mana
+			if (enemysOption == 3) {
+				enemy.rechargeManaBy(1);
+			}
+			//user has won
+			if (enemysOption == 4) {
+				//TODO: Delete if this if statement is useless
+			}
+			//user has lost
+			if (enemysOption == 5) {
+				//TODO: Delete if this if statement is useless
+			}
+			//unblock
+			enemy.unBlock();
+	}
+	public void determineOptionAndPrint (String usersOption) {
 			//no actions yet
 			if (usersOption.equals("n/a")) {
 				printActionStatus("player1", "n/a");
 			}
 			//set blocks
 			if (usersOption.equals("d")) {
-				player1.block();
 				printActionStatus("player1", "block");
 			}
 			//attack
 			if (usersOption.equals("a")) {
-				player1.attack(enemy, 1, "regular");
 				printActionStatus("player1", "attack");
 			}
 			//recharge mana
 			if (usersOption.equals("s")) {
-				player1.rechargeManaBy(1);
 				printActionStatus("player1", "recharge");
 			}
 			//user has won
@@ -132,27 +190,22 @@ public class Combat {
 			if (usersOption.equals("lost")) {
 				printActionStatus("player1", "lost");
 			}
-			//unblock
-			player1.unBlock();
 	}
-	public void handleChosenOption (int enemysOption) {
+	public void determineOptionAndPrint (int enemysOption) {
 			//no actions yet
 			if (enemysOption == 0) {
 				printActionStatus("enemy", "n/a");
 			}
 			//set blocks
 			if (enemysOption == 1) {
-				enemy.block();
 				printActionStatus("enemy", "block");
 			}
 			//attack
 			if (enemysOption == 2) {
-				enemy.attack(player1, 1, "regular");
 				printActionStatus("enemy", "attack");
 			}
 			//recharge mana
 			if (enemysOption == 3) {
-				enemy.rechargeManaBy(1);
 				printActionStatus("enemy", "recharge");
 			}
 			//user has won
@@ -163,8 +216,6 @@ public class Combat {
 			if (enemysOption == 5) {
 				printActionStatus("enemy", "lost");
 			}
-			//unblock
-			enemy.unBlock();
 	}
 
 	public void printStage() {
