@@ -35,28 +35,19 @@ public class Combat {
 	public void runCombat() {
 
 
-
+		//TODO: Bug #001 - "Defenceless" - Defend does not block attack. Still get damaged. This is for player1, but might also be a problem for enemy.
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
 		String usersOption = "n/a";
 		int enemysOption = 0;
-		Random rand = new Random();
-		String firstLine = "";
+		String firstLine = "\n";
+		int numOfLines = 0;
 
+		//TODO: Check if this variable is no longer needed and delete if it is not
 		boolean firstLoop = true;
 
-			firstLine = getFirstLine(firstLoop);
-
-			//print info
-			System.out.print(firstLine); 		//first line
-			printStage();				//stage, with icons
-			System.out.println();			//new line
-			determineAndPrint(usersOption);	//action status for player1
-			determineAndPrint(enemysOption);	//action status for enemy
-			System.out.println();			//new line
-			printMenu();				//menu
-			System.out.println();			//new line
-			System.out.print(" \r");		//erase userss previous input
+		//print info
+		printScreen(numOfLines, usersOption, enemysOption);
 
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
@@ -65,29 +56,17 @@ public class Combat {
 			//System.out.println("usersOption: " + usersOption);
 
 			//get info
- 			usersOption = scan.nextLine();		//get chosenOption for player1
-			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
-
-			//modify p1 and enemy objects based on input
-			carryOutAction(usersOption);
-			carryOutAction(enemysOption);
+			
+			getInputAndModifyObjects();
 	
 			//reset cursor
 			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
 			//The firstLoop and the goToStartOfPrev variables are not accessible.
 			//DONE: I changed the if statements into a function
-			firstLine = getFirstLine(firstLoop);
 
-			//print info
-			System.out.print(firstLine); 		//first line
-			printStage();				//stage, with icons
-			System.out.println();			//new line
-			determineAndPrint(usersOption);	//action status for player1
-			determineAndPrint(enemysOption);	//action status for enemy
-			System.out.println();			//new line
-			printMenu();				//menu
-			System.out.println();			//new line
-			System.out.print(" \r");		//erase userss previous input
+			numOfLines = 9;
+			printScreen(numOfLines, usersOption, enemysOption);
+
 
 		}
 
@@ -100,36 +79,77 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-		System.out.print(firstLine); 		//QUESTION: Why do I get an error "variable firstLine might not have been initialized" when I initialize the variable inside the while loop?
-							//ANSWER: ? I think because it's possible for the loop to be bypased in some cases, in which case the variable would not be initialized, so the compiler doesn't compile unless I eliminate that possibility.
-		printStage();
-		System.out.println();
-		determineAndPrint(usersOption);
-		determineAndPrint(enemysOption);
-		System.out.println();
-		printMenu();
-		System.out.println();
+		numOfLines = 10;
+		printScreen(numOfLines, usersOption, enemysOption);
 
 	}
 
-	public String getFirstLine(boolean firstLoop) {
+	public void printScreen(int numOfLines, String usersOption, int enemysOption) {
+
+
+		String firstLine;
+			if (numOfLines == 0) {
+				firstLine = "\n";
+			} else {
+				firstLine = getResetCursorString(numOfLines);
+			}
+		//print first line
+		System.out.print(firstLine); 		
+
+		//print stage, with icons
+		printStage();				
+		System.out.println();			
+
+		//print action status for user and enemy
+		determineAndPrint(usersOption);	
+		determineAndPrint(enemysOption);
+		System.out.println();	
+
+		//print menu
+		printMenu();	
+		System.out.println();
+
+		//erase users previous input
+		System.out.print(" \r");
+	}
+
+	public void getInputAndModifyObjects() {
+			
+			Random rand = new Random();
+			String usersOption;
+			int enemysOption;
+			//get info
+ 			usersOption = scan.nextLine();		//get chosenOption for player1
+			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
+
+			//modify p1 and enemy objects based on input
+			carryOutAction(usersOption);
+			carryOutAction(enemysOption);
+	}
+
+	
+
+
+	public String getResetCursorString(int numOfLines) {
+
 
 		String goToStartOfPrev = "";
-		int numOfLines;
-		numOfLines = 9;
 		for (int i = 1; i < numOfLines; i++) {
 			goToStartOfPrev += "\033[F";
 		}
-		String firstLine;
 
-		if (firstLoop) {
-			firstLoop = false;
-			firstLine = "\n";
-		} else {
-			firstLine = goToStartOfPrev;
-		}
-		
-		return firstLine;
+		return goToStartOfPrev;
+
+		//String firstLine
+//
+//		if (firstLoop) {
+//			firstLoop = false;
+//			firstLine = "\n";
+//		} else {
+//			firstLine = goToStartOfPrev;
+//		}
+//		
+//		return firstLine;
 	}
 
 	public void carryOutAction (String usersOption) {
