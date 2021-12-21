@@ -39,7 +39,7 @@ public class Combat {
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
 		String usersOption = "n/a";
-		int enemysOption = 0;
+		String enemysOption = "n/a";
 		String firstLine = "\n";
 		int numOfLines = 0;
 
@@ -56,9 +56,12 @@ public class Combat {
 			//System.out.println("usersOption: " + usersOption);
 
 			//get info
-			usersOption = getUsersInputAndModifyObject();
-			enemysOption = getEnemysInputAndModifyObject();
-	
+ 			usersOption = getUsersOption();
+			enemysOption = getEnemysOption();
+
+			//modify objects
+			modifyObjects(usersOption, enemysOption);
+
 			//process and print output
 			//TODO: Modularize - split processing input and printing output
 			numOfLines = 10;
@@ -71,19 +74,41 @@ public class Combat {
 		//determine winner
 		if (player1.getHealth() > 0) { //player1 wins only if they still have health
 			usersOption = "won";
-			enemysOption = 5;
+			enemysOption = "lost";
 		} else {
 			usersOption = "lost";
-			enemysOption = 4;
+			enemysOption = "won";
 		}
 
 		//print output explaining who won
-		determineAndPrint(usersOption);
-		determineAndPrint(enemysOption);
+		determineActionAndPrint(usersOption, "player1");
+		determineActionAndPrint(enemysOption, "enemy");
 		System.out.println();
 	}
 
-	public void printScreen(int numOfLines, String usersOption, int enemysOption) {
+	public String getUsersOption() {
+		Scanner scan = new Scanner(System.in);
+		String usersOption = scan.nextLine();
+
+		return usersOption;
+	}
+	public String getEnemysOption() {
+		Random rand = new Random();
+		int enemysOptionInt = rand.nextInt(3) + 1;
+		String enemysOption;
+
+		if (enemysOptionInt == 1) {
+			enemysOption = "a";
+		} else if (enemysOptionInt == 2) {
+			enemysOption = "s";
+		} else {
+			enemysOption = "d";
+		}
+
+		return enemysOption;
+		
+	}
+	public void printScreen(int numOfLines, String usersOption, String enemysOption) {
 
 
 		//TEST
@@ -104,8 +129,8 @@ public class Combat {
 
 		//determine and print action status for user and enemy
 		resetBlocks();
-		determineAndPrint(usersOption);	
-		determineAndPrint(enemysOption);
+		determineActionAndPrint(usersOption, "player1");
+		determineActionAndPrint(enemysOption, "enemy");
 		System.out.println();	
 
 		//print menu
@@ -116,11 +141,38 @@ public class Combat {
 		System.out.print(" \r");
 	}
 
+	public void modifyObjects(String usersOption, String enemysOption) {
+
+		//reset blocks
+		resetBlocks();
+
+		//phase 1 - block if possible
+		if (usersOption.equals("d")) {
+			player1.block();
+		}
+		if (enemysOption.equals("d")) {
+			enemy.block();
+		}
+
+
+		//phase 2 - attack or recharge mana
+		if (!usersOption.equals("d")) {
+			carryOutAction(usersOption, player1);
+		}
+		if (!enemysOption.equals("d")) {
+			carryOutAction(enemysOption, enemy);
+		}
+
+
+		//processPhase1Actions(usersOption, enemysOption);
+		//processPhase2Actions(usersOption, enemysOption);
+
+	}
+
 	public String getUsersInputAndModifyObject() {
 			
 			//get chosen option for player 1
-			String usersOption;
- 			usersOption = scan.nextLine();
+			String usersOption = "";
 
 			//modify p1 object based on input
 			carryOutAction(usersOption);
@@ -131,17 +183,13 @@ public class Combat {
 			
 			//get chosen option for enemy, which is a random number from 1 to 3
 			Random rand = new Random();
-			int enemysOption;
-			enemysOption = rand.nextInt(3)+1;
+			int enemysOption = 0;
 
 			//modify enemy object based on input
 			carryOutAction(enemysOption);
 
 			return enemysOption;
 	}
-
-	
-
 
 	public String getResetCursorString(int numOfLines) {
 
@@ -157,6 +205,17 @@ public class Combat {
 	public void resetBlocks() {
 		player1.unBlock();
 		enemy.unBlock();
+	}
+	public void carryOutAction(String chosenOption, Character subject) {
+		
+			//attack
+			if (chosenOption.equals("a")) {
+				subject.attack(enemy, 1, "regular");
+			}
+			//recharge mana
+			if (chosenOption.equals("s")) {
+				subject.rechargeManaBy(1);
+			}
 	}
 	public void carryOutAction (String usersOption) {
 			//no input yet - no action
@@ -210,15 +269,44 @@ public class Combat {
 				//TODO: Delete if this if statement is useless
 			}
 	}
+
 	public void processPhase1Actions(String usersOption, int enemysOption) { //only blocks are phase 1 actions, these need to be processed first
 		
 	}
-	public void processPhase2Actions() { //all actions except blocks are phase 2 actions
+	public void processPhase2Actions(String usersOption, int enemysOption) { //all actions except blocks are phase 2 actions
 		
+	}
+	public void determineActionAndPrint (String chosenOption, String subject) {
+		
+			//no actions yet
+			//no input yet - no mdaction
+			if (chosenOption.equals("n/a")) {
+				printActionStatus(subject, "n/a");
+			}
+			//set blocks
+			if (chosenOption.equals("d")) {
+				printActionStatus(subject, "block");
+			}
+			//attack
+			if (chosenOption.equals("a")) {
+				printActionStatus(subject, "attack");
+			}
+			//recharge mana
+			if (chosenOption.equals("s")) {
+				printActionStatus(subject, "recharge");
+			}
+			//user has won - no action
+			if (chosenOption.equals("won")) {
+				printActionStatus(subject, "won");
+			}
+			//user has lost - no action
+			if (chosenOption.equals("lost")) {
+				printActionStatus(subject, "lost");
+			}
 	}
 	public void determineAndPrint (String usersOption) {
 			//no actions yet
-			//no input yet - no action
+			//no input yet - no mdaction
 			if (usersOption.equals("n/a")) {
 				printActionStatus("player1", "n/a");
 			}
