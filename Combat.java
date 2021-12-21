@@ -80,9 +80,13 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-		numOfLines = 9;
-		printScreen(numOfLines, usersOption, enemysOption);
 
+		//numOfLines = 9;
+		//printScreen(numOfLines, usersOption, enemysOption);
+
+		determineAndPrint(usersOption);
+		determineAndPrint(enemysOption);
+		System.out.println();
 	}
 
 	public void printScreen(int numOfLines, String usersOption, int enemysOption) {
