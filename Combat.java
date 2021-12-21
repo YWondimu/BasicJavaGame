@@ -56,15 +56,10 @@ public class Combat {
 			//System.out.println("usersOption: " + usersOption);
 
 			//get info
-			
 			usersOption = getUsersInputAndModifyObject();
 			enemysOption = getEnemysInputAndModifyObject();
 	
-			//reset cursor
-			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
-			//The firstLoop and the goToStartOfPrev variables are not accessible.
-			//DONE: I changed the if statements into a function
-
+			//print output
 			numOfLines = 10;
 			printScreen(numOfLines, usersOption, enemysOption);
 
@@ -72,6 +67,7 @@ public class Combat {
 		}
 
 
+		//determine winner
 		if (player1.getHealth() > 0) { //player1 wins only if they still have health
 			usersOption = "won";
 			enemysOption = 5;
@@ -80,10 +76,7 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-
-		//numOfLines = 9;
-		//printScreen(numOfLines, usersOption, enemysOption);
-
+		//print output explaining who won
 		determineAndPrint(usersOption);
 		determineAndPrint(enemysOption);
 		System.out.println();
@@ -95,16 +88,12 @@ public class Combat {
 		//TEST
 		//System.out.println("Users Option: " + usersOption);
 
-
+		//get reset cursor string if necessary
 		String firstLine = "";
-			//if (numOfLines == 0) {
-			//	firstLine = "\n";
-			//} else {
-			//	firstLine = getResetCursorString(numOfLines);
-			//}
-			if (numOfLines > 0) {
-				firstLine = getResetCursorString(numOfLines);
-			}
+		if (numOfLines > 0) {
+			firstLine = getResetCursorString(numOfLines);
+		}
+
 		//print first line
 		System.out.println(firstLine); 		
 
@@ -127,23 +116,23 @@ public class Combat {
 
 	public String getUsersInputAndModifyObject() {
 			
+			//get chosen option for player 1
 			String usersOption;
-			//get info
- 			usersOption = scan.nextLine();		//get chosenOption for player1
+ 			usersOption = scan.nextLine();
 
-			//modify p1 and enemy objects based on input
+			//modify p1 object based on input
 			carryOutAction(usersOption);
 
 			return usersOption;
 	}
 	public int getEnemysInputAndModifyObject() {
 			
+			//get chosen option for enemy, which is a random number from 1 to 3
 			Random rand = new Random();
 			int enemysOption;
-			//get info
-			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
+			enemysOption = rand.nextInt(3)+1;
 
-			//modify p1 and enemy objects based on input
+			//modify enemy object based on input
 			carryOutAction(enemysOption);
 
 			return enemysOption;
@@ -161,21 +150,10 @@ public class Combat {
 		}
 
 		return goToStartOfPrev;
-
-		//String firstLine
-//
-//		if (firstLoop) {
-//			firstLoop = false;
-//			firstLine = "\n";
-//		} else {
-//			firstLine = goToStartOfPrev;
-//		}
-//		
-//		return firstLine;
 	}
 
 	public void carryOutAction (String usersOption) {
-			//no actions yet
+			//no input yet - no action
 			if (usersOption.equals("n/a")) {
 				//TODO: Delete if this if statement is useless
 			}
@@ -191,11 +169,11 @@ public class Combat {
 			if (usersOption.equals("s")) {
 				player1.rechargeManaBy(1);
 			}
-			//user has won
+			//user has won - no action
 			if (usersOption.equals("won")) {
 				//TODO: Delete if this if statement is useless
 			}
-			//user has lost
+			//user has lost - no action
 			if (usersOption.equals("lost")) {
 				//TODO: Delete if this if statement is useless
 			}
@@ -203,7 +181,7 @@ public class Combat {
 			player1.unBlock();
 	}
 	public void carryOutAction (int enemysOption) {
-			//no actions yet
+			//no input yet - no action
 			if (enemysOption == 0) {
 				//TODO: Delete if this if statement is useless
 			}
@@ -219,11 +197,11 @@ public class Combat {
 			if (enemysOption == 3) {
 				enemy.rechargeManaBy(1);
 			}
-			//user has won
+			//user has won - no action
 			if (enemysOption == 4) {
 				//TODO: Delete if this if statement is useless
 			}
-			//user has lost
+			//user has lost - no action
 			if (enemysOption == 5) {
 				//TODO: Delete if this if statement is useless
 			}
@@ -232,6 +210,7 @@ public class Combat {
 	}
 	public void determineAndPrint (String usersOption) {
 			//no actions yet
+			//no input yet - no action
 			if (usersOption.equals("n/a")) {
 				printActionStatus("player1", "n/a");
 			}
@@ -247,17 +226,18 @@ public class Combat {
 			if (usersOption.equals("s")) {
 				printActionStatus("player1", "recharge");
 			}
-			//user has won
+			//user has won - no action
 			if (usersOption.equals("won")) {
 				printActionStatus("player1", "won");
 			}
-			//user has lost
+			//user has lost - no action
 			if (usersOption.equals("lost")) {
 				printActionStatus("player1", "lost");
 			}
 	}
 	public void determineAndPrint (int enemysOption) {
 			//no actions yet
+			//no input yet - no action
 			if (enemysOption == 0) {
 				printActionStatus("enemy", "n/a");
 			}
@@ -273,11 +253,11 @@ public class Combat {
 			if (enemysOption == 3) {
 				printActionStatus("enemy", "recharge");
 			}
-			//user has won
+			//user has won - no action
 			if (enemysOption == 4) {
 				printActionStatus("enemy", "won");
 			}
-			//user has lost
+			//user has lost - no action
 			if (enemysOption == 5) {
 				printActionStatus("enemy", "lost");
 			}
