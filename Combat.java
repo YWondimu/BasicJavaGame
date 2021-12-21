@@ -59,7 +59,8 @@ public class Combat {
 			usersOption = getUsersInputAndModifyObject();
 			enemysOption = getEnemysInputAndModifyObject();
 	
-			//print output
+			//process and print output
+			//TODO: Modularize - split processing input and printing output
 			numOfLines = 10;
 			printScreen(numOfLines, usersOption, enemysOption);
 
@@ -101,7 +102,8 @@ public class Combat {
 		printStage();				
 		System.out.println();			
 
-		//print action status for user and enemy
+		//determine and print action status for user and enemy
+		resetBlocks();
 		determineAndPrint(usersOption);	
 		determineAndPrint(enemysOption);
 		System.out.println();	
@@ -152,6 +154,10 @@ public class Combat {
 		return goToStartOfPrev;
 	}
 
+	public void resetBlocks() {
+		player1.unBlock();
+		enemy.unBlock();
+	}
 	public void carryOutAction (String usersOption) {
 			//no input yet - no action
 			if (usersOption.equals("n/a")) {
@@ -177,8 +183,6 @@ public class Combat {
 			if (usersOption.equals("lost")) {
 				//TODO: Delete if this if statement is useless
 			}
-			//unblock
-			player1.unBlock();
 	}
 	public void carryOutAction (int enemysOption) {
 			//no input yet - no action
@@ -205,8 +209,12 @@ public class Combat {
 			if (enemysOption == 5) {
 				//TODO: Delete if this if statement is useless
 			}
-			//unblock
-			enemy.unBlock();
+	}
+	public void processPhase1Actions(String usersOption, int enemysOption) { //only blocks are phase 1 actions, these need to be processed first
+		
+	}
+	public void processPhase2Actions() { //all actions except blocks are phase 2 actions
+		
 	}
 	public void determineAndPrint (String usersOption) {
 			//no actions yet
