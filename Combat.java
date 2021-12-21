@@ -57,14 +57,15 @@ public class Combat {
 
 			//get info
 			
-			getInputAndModifyObjects();
+			usersOption = getUsersInputAndModifyObject();
+			enemysOption = getEnemysInputAndModifyObject();
 	
 			//reset cursor
 			//TODO: How to make this more modular? Putting it into a function doesn't seem to work.
 			//The firstLoop and the goToStartOfPrev variables are not accessible.
 			//DONE: I changed the if statements into a function
 
-			numOfLines = 9;
+			numOfLines = 10;
 			printScreen(numOfLines, usersOption, enemysOption);
 
 
@@ -79,7 +80,7 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-		numOfLines = 10;
+		numOfLines = 9;
 		printScreen(numOfLines, usersOption, enemysOption);
 
 	}
@@ -87,14 +88,21 @@ public class Combat {
 	public void printScreen(int numOfLines, String usersOption, int enemysOption) {
 
 
-		String firstLine;
-			if (numOfLines == 0) {
-				firstLine = "\n";
-			} else {
+		//TEST
+		//System.out.println("Users Option: " + usersOption);
+
+
+		String firstLine = "";
+			//if (numOfLines == 0) {
+			//	firstLine = "\n";
+			//} else {
+			//	firstLine = getResetCursorString(numOfLines);
+			//}
+			if (numOfLines > 0) {
 				firstLine = getResetCursorString(numOfLines);
 			}
 		//print first line
-		System.out.print(firstLine); 		
+		System.out.println(firstLine); 		
 
 		//print stage, with icons
 		printStage();				
@@ -113,18 +121,28 @@ public class Combat {
 		System.out.print(" \r");
 	}
 
-	public void getInputAndModifyObjects() {
+	public String getUsersInputAndModifyObject() {
 			
-			Random rand = new Random();
 			String usersOption;
-			int enemysOption;
 			//get info
  			usersOption = scan.nextLine();		//get chosenOption for player1
-			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
 
 			//modify p1 and enemy objects based on input
 			carryOutAction(usersOption);
+
+			return usersOption;
+	}
+	public int getEnemysInputAndModifyObject() {
+			
+			Random rand = new Random();
+			int enemysOption;
+			//get info
+			enemysOption = rand.nextInt(3)+1;	//get chosenOption for enemy, which is a random number from 1 to 3
+
+			//modify p1 and enemy objects based on input
 			carryOutAction(enemysOption);
+
+			return enemysOption;
 	}
 
 	
