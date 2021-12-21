@@ -41,9 +41,23 @@ public class Combat {
 		String usersOption = "n/a";
 		int enemysOption = 0;
 		Random rand = new Random();
-		String firstLine;
+		String firstLine = "";
 
 		boolean firstLoop = true;
+
+			firstLine = getFirstLine(firstLoop);
+
+			//print info
+			System.out.print(firstLine); 		//first line
+			printStage();				//stage, with icons
+			System.out.println();			//new line
+			determineAndPrint(usersOption);	//action status for player1
+			determineAndPrint(enemysOption);	//action status for enemy
+			System.out.println();			//new line
+			printMenu();				//menu
+			System.out.println();			//new line
+			System.out.print(" \r");		//erase userss previous input
+
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
 
@@ -86,7 +100,8 @@ public class Combat {
 			enemysOption = 4;
 		}
 
-		System.out.print(firstLine); 		//first line
+		System.out.print(firstLine); 		//QUESTION: Why do I get an error "variable firstLine might not have been initialized" when I initialize the variable inside the while loop?
+							//ANSWER: ? I think because it's possible for the loop to be bypased in some cases, in which case the variable would not be initialized, so the compiler doesn't compile unless I eliminate that possibility.
 		printStage();
 		System.out.println();
 		determineAndPrint(usersOption);
