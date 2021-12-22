@@ -4,6 +4,7 @@ public class TestStuff {
 		tester.initializeStringOutsideLoopVsDont(); //If variable is used within a scope, it must be initialized in that scope, even if it is initialized in a loop prior to use of the variable in the outer scope. I think this is to avoid any accidental uses of the variable without initializing (e.g. if the loop is not entered for whatever reason).
 		//String stringOutsideFunction;
 		tester.modifyStringOutsideFunction(); //Cannot modify variable that is not passed into function
+		tester.printTextInColor();
 	}
 
 
@@ -26,4 +27,9 @@ public class TestStuff {
 		System.out.println(stringOutsideFunction);
 	}
 
+	public void printTextInColor() {
+		String ANSI_RESET = "\u001B[0m";
+		String ANSI_RED = "\u001B[31m";
+		System.out.println(ANSI_RED + "This is red ... hopefully haha." + ANSI_RESET);
+	}
 }
