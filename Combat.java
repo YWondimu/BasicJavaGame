@@ -87,12 +87,15 @@ public class Combat {
 
 
 		//determine winner
-		if (player1.getHealth() > 0) { //player1 wins only if they still have health
+		if (player1.getHealth() > enemy.getHealth()) { //player1 wins only if they still have health
 			usersOption = "won";
 			enemysOption = "lost";
-		} else {
+		} else if (player1.getHealth() < enemy.getHealth()) {
 			usersOption = "lost";
 			enemysOption = "won";
+		} else {
+			usersOption = "tied";
+			enemysOption = "tied";
 		}
 
 		//print output explaining who won
@@ -341,6 +344,10 @@ public class Combat {
 			if (chosenOption.equals("lost")) {
 				printActionStatus(subject, "lost");
 			}
+			//user has lost - no action
+			if (chosenOption.equals("tied")) {
+				printActionStatus(subject, "tied");
+			}
 	}
 	public void determineAndPrint (String usersOption) {
 			//no input yet - no action
@@ -465,6 +472,8 @@ public class Combat {
 			output = firstHalf + "WON!";
 		} else if (what == "lost") {
 			output = firstHalf + "lost.";
+		} else if (what == "tied") {
+			output = firstHalf + "tied!";
 		} else if (what == "n/a") {
 			output = firstHalf + "... waiting for action.";
 		}
