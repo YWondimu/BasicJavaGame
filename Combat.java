@@ -48,6 +48,9 @@ public class Combat {
 	public void runCombat() {
 
 
+		//TODO: Make log - create file, output to file
+			//File name should be "Log-<DATEANDTIME>", that way I don't have to check to see if the file exists
+			//Make it possible to give the log a name using command line arguments
 		//TODO: Delete functions that I'm not using anymore.
 		//TODO: Add output that tells user when there is a tie.
 		//TODO: Bug #001 - "Defenceless" - Defend does not block attack. Still get damaged. This is for player1, but might also be a problem for enemy.
