@@ -3,6 +3,17 @@ import java.util.Random;
 
 public class Combat {
 
+	//TODO: Can I put these somehwere else? Maybe in another file? Then I import them?
+	final String ANSI_RESET = "\u001B[0m";
+	final String ANSI_BLACK = "\u001B[30m";
+	final String ANSI_RED = "\u001B[31m";
+	final String ANSI_GREEN = "\u001B[32m";
+	final String ANSI_YELLOW = "\u001B[33m";
+	final String ANSI_BLUE = "\u001B[34m";
+	final String ANSI_PURPLE = "\u001B[35m";
+	final String ANSI_CYAN = "\u001B[36m";
+	final String ANSI_WHITE = "\u001B[37m";
+
 	Player1 player1;
 	Enemy enemy;
 
@@ -395,11 +406,11 @@ public class Combat {
 		}
 
 		if (what == "attack") {
-			output = firstHalf + "attacked!"; 
+			output = firstHalf + makeRed("attacked") + "!"; 
 		} else if (what == "block") {
-			output = firstHalf + "blocked!"; 
+			output = firstHalf + makeYellow("blocked") + "!"; 
 		} else if (what == "recharge") {
-			output = firstHalf + "recharged mana!"; 
+			output = firstHalf + makeCyan("recharged mana") + "!"; 
 		} else if (what == "won") {
 			output = firstHalf + "WON!";
 		} else if (what == "lost") {
@@ -411,6 +422,22 @@ public class Combat {
 		//add 10 spaces to end of output
 		output += "                    ";
 		System.out.println(output);
+	}
+
+	public String makeRed(String text) {
+		return ANSI_RED + text + ANSI_RESET;
+	}
+	public String makeGreen(String text) {
+		return ANSI_GREEN + text + ANSI_RESET;
+	}
+	public String makePurple(String text) {
+		return ANSI_PURPLE + text + ANSI_RESET;
+	}
+	public String makeCyan(String text) {
+		return ANSI_CYAN + text + ANSI_RESET;
+	}
+	public String makeYellow(String text) {
+		return ANSI_YELLOW + text + ANSI_RESET;
 	}
 	//add broken heart for damage
 	//add fire and shield for attack and block, and add water thing for mana regen

@@ -20,5 +20,23 @@ public class ColoredText {
 			ANSI_CYAN + "cyan" + ANSI_RESET + "\n" + 
 			ANSI_WHITE + "white" + ANSI_RESET + "\n"
 			);
+
+		System.out.println("Make " + makeRed("red") + makeGreen("green") + makePurple("purple"));
+	}
+
+	public static String makeRed(String text) {
+		return ANSI_RED + text + ANSI_RESET;
+	}
+	public static String makeGreen(String text) {
+		return ANSI_GREEN + text + ANSI_RESET;
+	}
+	public static String makePurple(String text) {
+		return ANSI_PURPLE + text + ANSI_RESET;
+	}
+	public static String makeCyan(String text) {
+		return ANSI_CYAN + text + ANSI_RESET;
+	}
+	public static String makeYellow(String text) {
+		return ANSI_YELLOW + text + ANSI_RESET;
 	}
 }
