@@ -147,7 +147,7 @@ public class Combat {
 		System.out.println(firstLine); 		
 
 		//print stage, with icons
-		printStage();				
+		printStage(usersOption, enemysOption);				
 		System.out.println();			
 
 		//determine and print action status for user and enemy
@@ -376,18 +376,49 @@ public class Combat {
 			}
 	}
 
-	public void printStage() {
-		String playerHealth = healthIcon + player1.getHealth();
-		String playerMana = manaIcon + player1.getMana();
+	public void printStage(String usersOption, String enemysOption) {
+		
+		String p1HealthDigit = colorizeHealthDigit("" + player1.getHealth(), usersOption, enemysOption);
+		//System.out.println("p1HealthDigit: " + p1HealthDigit);
+		String p1ManaDigit = colorizeManaDigit("" + player1.getMana(), usersOption, enemysOption);
+		//System.out.println("p1HealthDigit: " + p1HealthDigit);
+		String enemyHealthDigit = colorizeHealthDigit("" + enemy.getHealth(), enemysOption, usersOption);
+		//System.out.println("p1HealthDigit: " + p1HealthDigit);
+		String enemyManaDigit = colorizeManaDigit("" + enemy.getMana(), enemysOption, usersOption);
+		//System.out.println("p1HealthDigit: " + p1HealthDigit);
+
+		String playerHealth = healthIcon + p1HealthDigit;
+		String playerMana = manaIcon + p1ManaDigit;
 		String playerStage = playerHealth + playerMana + " " + p1Avatar;
 
-		String enemyHealth = enemy.getHealth() + healthIcon;
-		String enemyMana = enemy.getMana() + manaIcon ;
+		String enemyHealth = enemyHealthDigit + healthIcon;
+		String enemyMana =  enemyManaDigit + manaIcon ;
 		String enemyStage = enemyAvatar + " " + enemyMana + enemyHealth + " ";
 		
 		String stage = playerStage + "     " + enemyStage;
 		
 		System.out.println(stage);
+	}
+
+	public String colorizeHealthDigit(String digit, String subjectsOption, String opponentsOption) {
+
+		if (opponentsOption.equals("a")  && !subjectsOption.equals("d")){
+			digit = makeRed(digit);
+		} else if (subjectsOption.equals("d") && opponentsOption.equals("a")){
+			digit = makeYellow(digit);
+		}
+
+		//System.out.println(digit);
+		return digit;
+	}
+	public String colorizeManaDigit(String digit, String subjectsOption, String opponentsOption) {
+
+		if (subjectsOption.equals("s")) {
+			digit = makeCyan(digit);
+		}
+
+		//System.out.println(digit);
+		return digit;
 	}
 
 	public void printMenu() {
