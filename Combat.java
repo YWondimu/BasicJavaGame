@@ -453,7 +453,7 @@ public class Combat {
 	}
 
 	public void printMenu() {
-		String menu = "a: attack | s: charge mana | d: defend";
+		String menu = "a: " + makeRed("attack") + " | s: " + makeCyan("charge mana") + " | d: " + makeYellow("defend");
 		System.out.println(menu);
 	}
 
