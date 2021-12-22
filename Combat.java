@@ -47,6 +47,7 @@ public class Combat {
 
 
 		//TODO: Delete functions that I'm not using anymore.
+		//TODO: Add output that tells user when there is a tie.
 		//TODO: Bug #001 - "Defenceless" - Defend does not block attack. Still get damaged. This is for player1, but might also be a problem for enemy.
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
@@ -70,7 +71,8 @@ public class Combat {
 
 			//get info
  			usersOption = getUsersOption();
-			enemysOption = getEnemysOption();
+			//enemysOption = getEnemysOption();
+			enemysOption = getEnemysOption_TwoPlayer();
 
 			//modify objects
 			modifyObjects(usersOption, enemysOption);
@@ -114,6 +116,23 @@ public class Combat {
 		}
 
 		return usersOption;
+	}
+	public String getEnemysOption_TwoPlayer() {
+		System.out.print("\033[F          \r");
+		Scanner scan = new Scanner(System.in);
+		String enemysOption = "";
+
+		boolean inputIsValid = false;
+		while (!inputIsValid) {
+			enemysOption = scan.nextLine();
+			if (enemysOption.equals("a") || enemysOption.equals("s") || enemysOption.equals("d")) {
+				inputIsValid = true;
+			} else {
+				System.out.print("\033[F          \r");
+			}
+		}
+
+		return enemysOption;
 	}
 	public String getEnemysOption() {
 		Random rand = new Random();
@@ -488,6 +507,7 @@ public class Combat {
 			//enemy strategy picked at random? or chosen by player?
 			//chaotic - random choice of attack, charge, or defend
 		//action status should have color and/or emojis so that it is more clear what happened
+		//Instant Replay: Recording of game for review
 
 	//TODO: fix bugs that delays or changes health/mana
 		//there are some bugs that delay change or appearance of change to health and mana
