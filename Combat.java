@@ -16,6 +16,7 @@ public class Combat {
 
 	Player1 player1;
 	Enemy enemy;
+	String gameMode;
 
 	Scanner scan = new Scanner(System.in);
 
@@ -24,9 +25,10 @@ public class Combat {
 	String healthIcon = "\uD83E\uDE78";
 	String manaIcon = "\uD83D\uDCA7";
 
-	public Combat (Player1 player1, Enemy enemy) {
+	public Combat (Player1 player1, Enemy enemy, String gameMode) {
 		this.player1 = player1;
 		this.enemy = enemy;
+		this.gameMode = gameMode;
 	}
 
 	//interactive attack, defend, evade
@@ -71,8 +73,11 @@ public class Combat {
 
 			//get info
  			usersOption = getUsersOption();
-			//enemysOption = getEnemysOption();
-			enemysOption = getEnemysOption_TwoPlayer();
+			if (gameMode.equals("twoplayer")) {
+				enemysOption = getEnemysOption_TwoPlayer();
+			} else {
+				enemysOption = getEnemysOption();
+			}
 
 			//modify objects
 			modifyObjects(usersOption, enemysOption);
@@ -87,7 +92,7 @@ public class Combat {
 
 
 		//determine winner
-		if (player1.getHealth() > enemy.getHealth()) { //player1 wins only if they still have health
+		if (player1.getHealth() > enemy.getHealth()) {
 			usersOption = "won";
 			enemysOption = "lost";
 		} else if (player1.getHealth() < enemy.getHealth()) {

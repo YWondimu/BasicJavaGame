@@ -12,7 +12,13 @@ public class RunCombat {
 		Player1 player1 = new Player1(5, 5);
 		Enemy enemy = new Enemy(5,5);
 
-		Combat testCombat = new Combat(player1, enemy);
+		String gameMode = "";
+
+		if (args.length > 0) {
+			gameMode = args[0];
+		}
+
+		Combat testCombat = new Combat(player1, enemy, gameMode);
 		testCombat.runCombat();
 	}
 
