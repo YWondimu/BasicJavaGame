@@ -52,6 +52,7 @@ public class Combat {
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
 
+			//TODO: Fix Bug #002 - "Exploding Gun" - When the enemy attacks, they hurt themselves. That should not be.
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
@@ -162,10 +163,6 @@ public class Combat {
 		if (!enemysOption.equals("d")) {
 			carryOutAction(enemysOption, enemy);
 		}
-
-
-		//processPhase1Actions(usersOption, enemysOption);
-		//processPhase2Actions(usersOption, enemysOption);
 
 	}
 
@@ -305,8 +302,7 @@ public class Combat {
 			}
 	}
 	public void determineAndPrint (String usersOption) {
-			//no actions yet
-			//no input yet - no mdaction
+			//no input yet - no action
 			if (usersOption.equals("n/a")) {
 				printActionStatus("player1", "n/a");
 			}
@@ -332,7 +328,6 @@ public class Combat {
 			}
 	}
 	public void determineAndPrint (int enemysOption) {
-			//no actions yet
 			//no input yet - no action
 			if (enemysOption == 0) {
 				printActionStatus("enemy", "n/a");
@@ -371,8 +366,6 @@ public class Combat {
 		String stage = playerStage + "     " + enemyStage;
 		
 		System.out.println(stage);
-
-
 	}
 
 	public void printMenu() {
