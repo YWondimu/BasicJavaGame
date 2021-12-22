@@ -35,6 +35,7 @@ public class Combat {
 	public void runCombat() {
 
 
+		//TODO: Delete functions that I'm not using anymore.
 		//TODO: Bug #001 - "Defenceless" - Defend does not block attack. Still get damaged. This is for player1, but might also be a problem for enemy.
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
@@ -89,7 +90,17 @@ public class Combat {
 
 	public String getUsersOption() {
 		Scanner scan = new Scanner(System.in);
-		String usersOption = scan.nextLine();
+		String usersOption = "";
+
+		boolean inputIsValid = false;
+		while (!inputIsValid) {
+			usersOption = scan.nextLine();
+			if (usersOption.equals("a") || usersOption.equals("s") || usersOption.equals("d")) {
+				inputIsValid = true;
+			} else {
+				System.out.print("\033[F          \r");
+			}
+		}
 
 		return usersOption;
 	}
