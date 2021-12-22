@@ -158,10 +158,10 @@ public class Combat {
 
 		//phase 2 - attack or recharge mana
 		if (!usersOption.equals("d")) {
-			carryOutAction(usersOption, player1);
+			carryOutAction(usersOption, player1, enemy);
 		}
 		if (!enemysOption.equals("d")) {
-			carryOutAction(enemysOption, enemy);
+			carryOutAction(enemysOption, enemy, player1);
 		}
 
 	}
@@ -203,11 +203,11 @@ public class Combat {
 		player1.unBlock();
 		enemy.unBlock();
 	}
-	public void carryOutAction(String chosenOption, Character subject) {
+	public void carryOutAction(String chosenOption, Character subject, Character opponent) {
 		
 			//attack
 			if (chosenOption.equals("a")) {
-				subject.attack(enemy, 1, "regular");
+				subject.attack(opponent, 1, "regular");
 			}
 			//recharge mana
 			if (chosenOption.equals("s")) {
