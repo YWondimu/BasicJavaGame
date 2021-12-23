@@ -48,6 +48,7 @@ public class Combat {
 	public void runCombat() {
 
 
+		//TODO: Should I use machine learning??
 		//TODO: Make log - create file, output to file
 			//File name should be "Log-<DATEANDTIME>", that way I don't have to check to see if the file exists
 			//Make it possible to give the log a name using command line arguments
@@ -62,6 +63,7 @@ public class Combat {
 		int numOfLines = 0;
 
 		//TODO: Check if this variable is no longer needed and delete if it is not
+		//TODO: Keep a history of moves so that the "ai" can know how to respond based on past moves.
 		boolean firstLoop = true;
 
 		//print info
@@ -71,6 +73,9 @@ public class Combat {
 
 
 			//TODO: Fix Bug #002 - "Exploding Gun" - When the enemy attacks, they hurt themselves. That should not be.
+			//TODO: The print methods should return strings instead of printing them
+			//TODO: I should use "\n" in the strings and use print not println, that way I can count 
+			//how many new lines I have using string methods. And I can modify specific lines.
 			//TEST
 			//System.out.println("usersOption: " + usersOption);
 
@@ -90,8 +95,10 @@ public class Combat {
 			numOfLines = 10;
 			printScreen(numOfLines, usersOption, enemysOption);
 
+			//Add animation after printing to the screen
 
-		}
+
+		} 
 
 
 		//determine winner
@@ -111,6 +118,8 @@ public class Combat {
 		determineActionAndPrint(enemysOption, "enemy");
 		System.out.println();
 	}
+
+
 
 	public String getUsersOption() {
 		Scanner scan = new Scanner(System.in);
@@ -429,9 +438,13 @@ public class Combat {
 		String enemyMana =  enemyManaDigit + manaIcon ;
 		String enemyStage = enemyAvatar + " " + enemyMana + enemyHealth + " ";
 		
-		String stage = playerStage + "     " + enemyStage;
+		String stage = playerStage + "                    " + enemyStage;
 		
 		System.out.println(stage);
+	}
+
+	public void animate(String stage, String scene) {
+		
 	}
 
 	public String colorizeHealthDigit(String digit, String subjectsOption, String opponentsOption) {
