@@ -6,13 +6,44 @@ public class TestStuff {
 		tester.modifyStringOutsideFunction(); //Cannot modify variable that is not passed into function
 		tester.printTextInColor();
 
-		String testAssigningStringOnMultipleLines = 
+		tester.testAssigningStringOnMultipleLines();
+
+		//Below does not work
+		//tester.testStringBracketIndex();
+		
+		int count = tester.countSubstr("hello mellow jello elll elelelleell", "ell");
+		System.out.println("Count of substring is: " + count);
+	}
+
+	public int countSubstr(String outerString, String substring) {
+		int count = 0;
+		int fromIndex = 0;
+		int newIndex = -1;
+		for (int i = 0; i < outerString.length(); i++) {
+			newIndex = outerString.indexOf(substring, fromIndex);
+			if (newIndex >= 0) { //if newIndex >= 0 then the substring has been found
+				count++;
+				fromIndex = newIndex + substring.length();
+			}
+		}
+
+		return count;
+	}
+
+	public void testStringBracketIndex() {
+		String testString = "hello world";
+		//Below does not work
+		//System.out.println(testString[0]);
+	}
+
+	public void testAssigningStringOnMultipleLines() {
+		
+		String testString = 
 			"line1 \n" + 
 			"line2 \n";
 
-		System.out.print(testAssigningStringOnMultipleLines);
+		System.out.print(testString);
 	}
-
 
 	public void initializeStringOutsideLoopVsDont() {
 		

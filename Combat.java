@@ -44,7 +44,28 @@ public class Combat {
 		//other possible types
 			//random is random?
 			//responsive is responsive?
+	
+	//TODO:-> Make function that counts the number of occurrences of a substring
+	//TODO:-> Use this function to count how many instances of \n are in the
+	//screen substring
+	//TODO:-> Use this count to un-hardcode numOfLines
+	//TODO:-> There was another change I made. I should find it and
+	//make a note in the commit message
 
+	public int CountSubstr(String outerString, String substring) {
+		int count = 0;
+		int fromIndex = 0;
+		int newIndex = -1;
+		for (int i = 0; i < outerString.length(); i++) {
+			newIndex = outerString.indexOf(substring, fromIndex);
+			if (newIndex >= 0) { //if newIndex >= 0 then the substring has been found
+				count++;
+				fromIndex = newIndex + substring.length();
+			}
+		}
+
+		return count;
+	}
 	public void runCombat() {
 
 
