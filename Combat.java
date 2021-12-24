@@ -59,13 +59,16 @@ public class Combat {
 		String enemysOption = "n/a";
 		String firstLine = "\n";
 		int numOfLines = 0;
+		String screenToPrint = "";
 
 		//TODO: Check if this variable is no longer needed and delete if it is not
 		//TODO: Keep a history of moves so that the "ai" can know how to respond based on past moves.
 		boolean firstLoop = true;
 
 		//print info
-		printScreen(numOfLines, usersOption, enemysOption);
+		screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
+		System.out.print(screenToPrint);
+		numOfLines = 8;
 
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
@@ -86,7 +89,8 @@ public class Combat {
 			//process and print output
 			//TODO: Modularize - split processing input and printing output
 			numOfLines = 10;
-			printScreen(numOfLines, usersOption, enemysOption);
+			screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
+			System.out.print(screenToPrint);
 
 			//Add animation after printing to the screen
 
@@ -183,7 +187,7 @@ public class Combat {
 
 		return enemysOption;
 	}
-	public void printScreen(int numOfLines, String usersOption, String enemysOption) {
+	public String  getScreen(int numOfLines, String usersOption, String enemysOption) {
 
 		String screenString = "";
 		String emptyLine = "\n";
@@ -213,7 +217,7 @@ public class Combat {
 			"\n" +
 			eraseLineAndResetCursorToStartOfLine;
 
-		System.out.print(screenString);
+		return screenString;
 
 			
 	}
@@ -242,27 +246,6 @@ public class Combat {
 
 	}
 
-	public String getUsersInputAndModifyObject() {
-			
-			//get chosen option for player 1
-			String usersOption = "";
-
-			//modify p1 object based on input
-			carryOutAction(usersOption);
-
-			return usersOption;
-	}
-	public int getEnemysInputAndModifyObject() {
-			
-			//get chosen option for enemy, which is a random number from 1 to 3
-			Random rand = new Random();
-			int enemysOption = 0;
-
-			//modify enemy object based on input
-			carryOutAction(enemysOption);
-
-			return enemysOption;
-	}
 
 	public String getResetCursorString(int numOfLines) {
 
@@ -289,65 +272,6 @@ public class Combat {
 			if (chosenOption.equals("s")) {
 				subject.rechargeManaBy(1);
 			}
-	}
-	public void carryOutAction (String usersOption) {
-			//no input yet - no action
-			if (usersOption.equals("n/a")) {
-				//TODO: Delete if this if statement is useless
-			}
-			//set blocks
-			if (usersOption.equals("d")) {
-				player1.block();
-			}
-			//attack
-			if (usersOption.equals("a")) {
-				player1.attack(enemy, 1, "regular");
-			}
-			//recharge mana
-			if (usersOption.equals("s")) {
-				player1.rechargeManaBy(1);
-			}
-			//user has won - no action
-			if (usersOption.equals("won")) {
-				//TODO: Delete if this if statement is useless
-			}
-			//user has lost - no action
-			if (usersOption.equals("lost")) {
-				//TODO: Delete if this if statement is useless
-			}
-	}
-	public void carryOutAction (int enemysOption) {
-			//no input yet - no action
-			if (enemysOption == 0) {
-				//TODO: Delete if this if statement is useless
-			}
-			//set blocks
-			if (enemysOption == 1) {
-				enemy.block();
-			}
-			//attack
-			if (enemysOption == 2) {
-				enemy.attack(player1, 1, "regular");
-			}
-			//recharge mana
-			if (enemysOption == 3) {
-				enemy.rechargeManaBy(1);
-			}
-			//user has won - no action
-			if (enemysOption == 4) {
-				//TODO: Delete if this if statement is useless
-			}
-			//user has lost - no action
-			if (enemysOption == 5) {
-				//TODO: Delete if this if statement is useless
-			}
-	}
-
-	public void processPhase1Actions(String usersOption, int enemysOption) { //only blocks are phase 1 actions, these need to be processed first
-		
-	}
-	public void processPhase2Actions(String usersOption, int enemysOption) { //all actions except blocks are phase 2 actions
-		
 	}
 
 	public String getStage(String usersOption, String enemysOption) {
