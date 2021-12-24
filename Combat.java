@@ -314,13 +314,17 @@ public class Combat {
 		String enemyHealth = enemyHealthDigit + healthIcon;
 		String enemyMana =  enemyManaDigit + manaIcon ;
 		String enemyStage = enemyAvatar + " " + enemyMana + enemyHealth + " ";
+
+		String areaBetweenIcons = "                    ";
 		
-		String stage = playerStage + "                    " + enemyStage;
+		String stage = playerStage + areaBetweenIcons + enemyStage;
 		
 		return stage;
 	}
 
 	public void animate(String stage, String scene) {
+		//get space between avatars, using search and subtracting indexes
+		//use replace function to insert icon, use sleep to move icon
 		
 	}
 
