@@ -53,8 +53,6 @@ public class Combat {
 			//File name should be "Log-<DATEANDTIME>", that way I don't have to check to see if the file exists
 			//Make it possible to give the log a name using command line arguments
 		//TODO: Delete functions that I'm not using anymore.
-		//TODO: Add output that tells user when there is a tie.
-		//TODO: Bug #001 - "Defenceless" - Defend does not block attack. Still get damaged. This is for player1, but might also be a problem for enemy.
 		//TEST
 		//System.out.println (p1Avatar + " " + enemyAvatar + " " + healthIcon + " " + manaIcon);
 		String usersOption = "n/a";
@@ -72,7 +70,6 @@ public class Combat {
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
 
-			//TODO: Fix Bug #002 - "Exploding Gun" - When the enemy attacks, they hurt themselves. That should not be.
 			//TODO: The print methods should return strings instead of printing them
 			//TODO: I should use "\n" in the strings and use print not println, that way I can count 
 			//how many new lines I have using string methods. And I can modify specific lines.
@@ -81,11 +78,7 @@ public class Combat {
 
 			//get info
  			usersOption = getUsersOption();
-			if (gameMode.equals("twoplayer")) {
-				enemysOption = getEnemysOption_TwoPlayer();
-			} else {
-				enemysOption = getEnemysOption();
-			}
+			enemysOption = getEnemysOption();
 
 			//modify objects
 			modifyObjects(usersOption, enemysOption);
@@ -101,6 +94,7 @@ public class Combat {
 		} 
 
 
+		//TODO: Make the below lines relating to win/lost status into one function
 		//determine winner
 		if (player1.getHealth() > enemy.getHealth()) {
 			usersOption = "won";
@@ -114,12 +108,19 @@ public class Combat {
 		}
 
 		//print output explaining who won
-		determineActionAndPrint(usersOption, "player1");
-		determineActionAndPrint(enemysOption, "enemy");
-		System.out.println();
+
+		//TODO: Change this to win status, and make the whole thing into one function
+		String p1ActionStatus = getActionStatus("player1", usersOption);
+		String p2ActionStatus = getActionStatus("enemy", enemysOption);
+		
+		System.out.print(
+			"\n" + 
+			"\n" + 
+			p1ActionStatus + "\n" +
+			p2ActionStatus + "\n" +
+			"\n"
+			);
 	}
-
-
 
 	public String getUsersOption() {
 		Scanner scan = new Scanner(System.in);
@@ -136,6 +137,34 @@ public class Combat {
 		}
 
 		return usersOption;
+	}
+	public String getEnemysOption() {
+		
+		String enemysOption;
+
+		if (gameMode.equals("twoplayer")) {
+			enemysOption = getEnemysOption_TwoPlayer();
+		} else {
+			enemysOption = getEnemysOption_OnePlayer();
+		}
+
+		return enemysOption;
+	}
+	public String getEnemysOption_OnePlayer() {
+		
+		Random rand = new Random();
+		int enemysOptionInt = rand.nextInt(3) + 1;
+		String enemysOption;
+
+		if (enemysOptionInt == 1) {
+			enemysOption = "a";
+		} else if (enemysOptionInt == 2) {
+			enemysOption = "s";
+		} else {
+			enemysOption = "d";
+		}
+
+		return enemysOption;
 	}
 	public String getEnemysOption_TwoPlayer() {
 		System.out.print("\033[F          \r");
@@ -154,53 +183,39 @@ public class Combat {
 
 		return enemysOption;
 	}
-	public String getEnemysOption() {
-		Random rand = new Random();
-		int enemysOptionInt = rand.nextInt(3) + 1;
-		String enemysOption;
-
-		if (enemysOptionInt == 1) {
-			enemysOption = "a";
-		} else if (enemysOptionInt == 2) {
-			enemysOption = "s";
-		} else {
-			enemysOption = "d";
-		}
-
-		return enemysOption;
-		
-	}
 	public void printScreen(int numOfLines, String usersOption, String enemysOption) {
 
+		String screenString = "";
+		String emptyLine = "\n";
+		String stage = "";
+		String p1ActionStatus = "";
+		String p2ActionStatus = "";
+		String menu = "";
+		String p1WonStatus = "";
+		String p2WonStatus = "";
+		String resetCursorToFirstColAndLine = "";
+		String eraseLineAndResetCursorToStartOfLine = "";
+		
+		resetCursorToFirstColAndLine = getResetCursorString(numOfLines);
+		stage = getStage(usersOption, enemysOption);
+		p1ActionStatus = getActionStatus("player1", usersOption);
+		p2ActionStatus = getActionStatus("enemy", enemysOption);
+		menu = getMenu();
+		
 
-		//TEST
-		//System.out.println("Users Option: " + usersOption);
+		screenString = 
+			resetCursorToFirstColAndLine +
+			"\n" + 
+			stage + "\n" +
+			"\n" +
+			p1ActionStatus + "\n" +
+			p2ActionStatus + "\n" + 
+			"\n" +
+			eraseLineAndResetCursorToStartOfLine;
 
-		//get reset cursor string if necessary
-		String firstLine = "";
-		if (numOfLines > 0) {
-			firstLine = getResetCursorString(numOfLines);
-		}
+		System.out.print(screenString);
 
-		//print first line
-		System.out.println(firstLine); 		
-
-		//print stage, with icons
-		printStage(usersOption, enemysOption);				
-		System.out.println();			
-
-		//determine and print action status for user and enemy
-		resetBlocks();
-		determineActionAndPrint(usersOption, "player1");
-		determineActionAndPrint(enemysOption, "enemy");
-		System.out.println();	
-
-		//print menu
-		printMenu();	
-		System.out.println();
-
-		//erase users previous input
-		System.out.print(" \r");
+			
 	}
 
 	public void modifyObjects(String usersOption, String enemysOption) {
@@ -334,92 +349,8 @@ public class Combat {
 	public void processPhase2Actions(String usersOption, int enemysOption) { //all actions except blocks are phase 2 actions
 		
 	}
-	public void determineActionAndPrint (String chosenOption, String subject) {
-		
-			//no actions yet
-			//no input yet - no mdaction
-			if (chosenOption.equals("n/a")) {
-				printActionStatus(subject, "n/a");
-			}
-			//set blocks
-			if (chosenOption.equals("d")) {
-				printActionStatus(subject, "block");
-			}
-			//attack
-			if (chosenOption.equals("a")) {
-				printActionStatus(subject, "attack");
-			}
-			//recharge mana
-			if (chosenOption.equals("s")) {
-				printActionStatus(subject, "recharge");
-			}
-			//user has won - no action
-			if (chosenOption.equals("won")) {
-				printActionStatus(subject, "won");
-			}
-			//user has lost - no action
-			if (chosenOption.equals("lost")) {
-				printActionStatus(subject, "lost");
-			}
-			//user has lost - no action
-			if (chosenOption.equals("tied")) {
-				printActionStatus(subject, "tied");
-			}
-	}
-	public void determineAndPrint (String usersOption) {
-			//no input yet - no action
-			if (usersOption.equals("n/a")) {
-				printActionStatus("player1", "n/a");
-			}
-			//set blocks
-			if (usersOption.equals("d")) {
-				printActionStatus("player1", "block");
-			}
-			//attack
-			if (usersOption.equals("a")) {
-				printActionStatus("player1", "attack");
-			}
-			//recharge mana
-			if (usersOption.equals("s")) {
-				printActionStatus("player1", "recharge");
-			}
-			//user has won - no action
-			if (usersOption.equals("won")) {
-				printActionStatus("player1", "won");
-			}
-			//user has lost - no action
-			if (usersOption.equals("lost")) {
-				printActionStatus("player1", "lost");
-			}
-	}
-	public void determineAndPrint (int enemysOption) {
-			//no input yet - no action
-			if (enemysOption == 0) {
-				printActionStatus("enemy", "n/a");
-			}
-			//set blocks
-			if (enemysOption == 1) {
-				printActionStatus("enemy", "block");
-			}
-			//attack
-			if (enemysOption == 2) {
-				printActionStatus("enemy", "attack");
-			}
-			//recharge mana
-			if (enemysOption == 3) {
-				printActionStatus("enemy", "recharge");
-			}
-			//user has won - no action
-			if (enemysOption == 4) {
-				printActionStatus("enemy", "won");
-			}
-			//user has lost - no action
-			if (enemysOption == 5) {
-				printActionStatus("enemy", "lost");
-			}
-	}
 
-	public void printStage(String usersOption, String enemysOption) {
+	public String getStage(String usersOption, String enemysOption) {
 		
 		String p1HealthDigit = colorizeHealthDigit("" + player1.getHealth(), usersOption, enemysOption);
 		//System.out.println("p1HealthDigit: " + p1HealthDigit);
@@ -440,7 +371,7 @@ public class Combat {
 		
 		String stage = playerStage + "                    " + enemyStage;
 		
-		System.out.println(stage);
+		return stage;
 	}
 
 	public void animate(String stage, String scene) {
@@ -468,14 +399,24 @@ public class Combat {
 		return digit;
 	}
 
-	public void printMenu() {
+	public String getMenu() {
 		String menu = "a: " + makeRed("attack") + " | s: " + makeCyan("charge mana") + " | d: " + makeYellow("defend");
-		System.out.println(menu);
+
+		return menu;
 	}
 
-	public void printActionStatus (String who, String what) {
+	public String getActionStatus (String who, String what) {
 		String output = "";
 		String firstHalf = "";
+
+		//Change contents of "what" variable for readability
+		if (what.equals("a")) {
+			what = "attack";
+		} else if (what.equals("s")) {
+			what = "recharge";
+		} else if (what.equals("d")) {
+			what = "block";
+		}
 
 		if (who == "player1") {
 			firstHalf = p1Avatar + ": You ";
@@ -501,7 +442,8 @@ public class Combat {
 
 		//add 10 spaces to end of output
 		output += "                    ";
-		System.out.println(output);
+		
+		return output;
 	}
 
 	public String makeRed(String text) {

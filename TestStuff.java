@@ -5,6 +5,12 @@ public class TestStuff {
 		//String stringOutsideFunction;
 		tester.modifyStringOutsideFunction(); //Cannot modify variable that is not passed into function
 		tester.printTextInColor();
+
+		String testAssigningStringOnMultipleLines = 
+			"line1 \n" + 
+			"line2 \n";
+
+		System.out.print(testAssigningStringOnMultipleLines);
 	}
 
 
