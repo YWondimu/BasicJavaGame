@@ -52,7 +52,7 @@ public class Combat {
 	//TODO:-> There was another change I made. I should find it and
 	//make a note in the commit message
 
-	public int CountSubstr(String outerString, String substring) {
+	public int countSubstr(String outerString, String substring) {
 		int count = 0;
 		int fromIndex = 0;
 		int newIndex = -1;
@@ -66,6 +66,7 @@ public class Combat {
 
 		return count;
 	}
+
 	public void runCombat() {
 
 
@@ -88,8 +89,8 @@ public class Combat {
 
 		//print info
 		screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
+		numOfLines = countSubstr(screenToPrint, "\n") + 2;
 		System.out.print(screenToPrint);
-		numOfLines = 8;
 
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
@@ -109,8 +110,8 @@ public class Combat {
 
 			//process and print output
 			//TODO: Modularize - split processing input and printing output
-			numOfLines = 10;
 			screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
+			numOfLines = countSubstr(screenToPrint, "\n") + 2;
 			System.out.print(screenToPrint);
 
 			//Add animation after printing to the screen
