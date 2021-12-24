@@ -94,7 +94,6 @@ public class Combat {
 
 		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
 
-
 			//TODO: The print methods should return strings instead of printing them
 			//TODO: I should use "\n" in the strings and use print not println, that way I can count 
 			//how many new lines I have using string methods. And I can modify specific lines.
@@ -110,6 +109,7 @@ public class Combat {
 
 			//process and print output
 			//TODO: Modularize - split processing input and printing output
+			//TODO: Minor priority - make the bottom 3 lines into 1 function?
 			screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
 			numOfLines = countSubstr(screenToPrint, "\n") + 2;
 			System.out.print(screenToPrint);

@@ -5,11 +5,12 @@ public class AnimationExample {
 		String spaceToLeft = "";
 		String spaceToRight = "          ";
 		String dot = ".";
+		int time = Integer.parseInt(args[0]);
 		for (int i = 0; i < 10; i++) {
 			System.out.print( "\r" + spaceToLeft + dot + spaceToRight);
 			
 			try {
-				TimeUnit.MILLISECONDS.sleep(500);
+				TimeUnit.MILLISECONDS.sleep(time);
 			} catch (InterruptedException e) {
 			}
 			spaceToLeft += " ";
