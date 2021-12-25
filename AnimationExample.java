@@ -12,8 +12,11 @@ public class AnimationExample {
 			try {
 				TimeUnit.MILLISECONDS.sleep(time);
 			} catch (InterruptedException e) {
+				//TODO: Why doesn't the below work?
+				//System.out.println(e.message());
 			}
 			spaceToLeft += " ";
+			//TODO: Figure out why jsut catching the exception is fine.
 		}
 	}
 }

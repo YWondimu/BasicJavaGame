@@ -83,6 +83,7 @@ public class Combat {
 		int numOfLines = 0;
 		String screenToPrint = "";
 
+		//TODO: Show color for mana going down.
 		//TODO: Check if this variable is no longer needed and delete if it is not
 		//TODO: Keep a history of moves so that the "ai" can know how to respond based on past moves.
 		boolean firstLoop = true;
@@ -114,8 +115,9 @@ public class Combat {
 			numOfLines = countSubstr(screenToPrint, "\n") + 2;
 			System.out.print(screenToPrint);
 
+
 			//Add animation after printing to the screen
-			animate(numOfLines, screenToPrint);
+			//animate(numOfLines, screenToPrint);
 
 
 		} 
@@ -227,6 +229,7 @@ public class Combat {
 		stage = getStage(usersOption, enemysOption);
 		p1ActionStatus = getActionStatus("player1", usersOption);
 		p2ActionStatus = getActionStatus("enemy", enemysOption);
+		//TODO: I don't think this line below does anything. Delete it?
 		menu = getMenu();
 		
 
@@ -237,6 +240,8 @@ public class Combat {
 			"\n" +
 			p1ActionStatus + "\n" +
 			p2ActionStatus + "\n" + 
+			"\n" +
+			menu + "\n" +
 			"\n" +
 			eraseLineAndResetCursorToStartOfLine;
 
@@ -345,13 +350,14 @@ public class Combat {
 		//move curstor to sceneStartIndex's column and row
 		//TODO: Maybe the scene should be an object, and each line should have a name and row number?
 
-		moveCursor("up", 5);
+		moveCursor("up", 7);
 		moveCursor("right", 7); //NOTE: For some reason, the blood and water drops take up two spaces? And moving right by 0 moves the cursor by one? I think.
 		for (int i = 1; i < scene.length()-1; i++) {
 			
 		}
 		
 	}
+
 
 	public void moveCursor(String dir, int num) {
 		//dir = direction
@@ -459,6 +465,7 @@ public class Combat {
 		return spaces;
 	}
 
+	//TODO: Make the below into one function
 	public String makeRed(String text) {
 		return ANSI_RED + text + ANSI_RESET;
 	}
