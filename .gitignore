@@ -2,7 +2,8 @@
 **.class
 #ignore the compiledCode folder
 CompiledCode
-#ignore all swp files
+#ignore all swp and swo files
 **.swp
+**.swo
 #ignore macOS .DS_Store file
 .DS_Store

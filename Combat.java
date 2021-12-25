@@ -115,6 +115,7 @@ public class Combat {
 			System.out.print(screenToPrint);
 
 			//Add animation after printing to the screen
+			animate(numOfLines, screenToPrint);
 
 
 		} 
@@ -322,10 +323,62 @@ public class Combat {
 		return stage;
 	}
 
-	public void animate(String stage, String scene) {
+	public void animate(int numOfLines, String stage) {
 		//get space between avatars, using search and subtracting indexes
 		//use replace function to insert icon, use sleep to move icon
+
+		//take stage and find scene
+
+		//get first index of scene
+		int sceneStartIndex = stage.indexOf(p1Avatar);
+		int sceneEndIndex = stage.indexOf(enemyAvatar);
+
+		//get scene
+		String scene = stage.substring(sceneStartIndex, sceneEndIndex);
+
+		String fireBall = "o";
+		String explosion = "X";
+
+		//i want functions for fireball movement, and explosion, and blocking (maybe a block could consist of hte shield exploding
+		//instead of the avatar), and mana recharge.
+
+		//move curstor to sceneStartIndex's column and row
+		//TODO: Maybe the scene should be an object, and each line should have a name and row number?
+
+		moveCursor("up", 5);
+		moveCursor("right", 7); //NOTE: For some reason, the blood and water drops take up two spaces? And moving right by 0 moves the cursor by one? I think.
+		for (int i = 1; i < scene.length()-1; i++) {
+			
+		}
 		
+	}
+
+	public void moveCursor(String dir, int num) {
+		//dir = direction
+		//num = number of spaces
+
+		String cursorMovementString = "\033[";
+
+		cursorMovementString += num;
+
+		switch(dir) {
+			case "up":
+				cursorMovementString += "A";
+				break;
+			case "down":
+				cursorMovementString += "B";
+				break;
+			case "right":
+				cursorMovementString += "C";
+				break;
+			case "left":
+				cursorMovementString += "D";
+				break;
+			default:
+				break;
+		}
+		
+		System.out.print(cursorMovementString);
 	}
 
 	public String colorizeHealthDigit(String digit, String subjectsOption, String opponentsOption) {
@@ -396,6 +449,16 @@ public class Combat {
 		return output;
 	}
 
+	public String getSpaces(int num) {
+
+		String spaces = "";
+		for (int i = 1; i<=num; i++) {
+			spaces += " ";
+		}
+
+		return spaces;
+	}
+
 	public String makeRed(String text) {
 		return ANSI_RED + text + ANSI_RESET;
 	}
@@ -435,5 +498,8 @@ public class Combat {
 		//there are some bugs that delay change or appearance of change to health and mana
 		//find and fix
 	//TODO: fix error handling
-		//need to make sure that only correct input is accepted
+		//need to make sure that only correct input is accepte
+	//TODO: Fix Bug - #003 - UnnecessaryColor - When attacked without mana, enemys status health turns red or yellow.
+	//This should only happen if player1 attacks with mana, not without mana. (Same thing happens the other way: 
+	//when enemy attacks player1.)
 }
