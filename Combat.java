@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Combat {
 
@@ -117,7 +118,7 @@ public class Combat {
 
 
 			//Add animation after printing to the screen
-			//animate(numOfLines, screenToPrint);
+			animate(numOfLines, screenToPrint);
 
 
 		} 
@@ -336,7 +337,7 @@ public class Combat {
 
 		//get first index of scene
 		int sceneStartIndex = stage.indexOf(p1Avatar);
-		int sceneEndIndex = stage.indexOf(enemyAvatar);
+		int sceneEndIndex = stage.indexOf(enemyAvatar) + 10;
 
 		//get scene
 		String scene = stage.substring(sceneStartIndex, sceneEndIndex);
@@ -352,9 +353,20 @@ public class Combat {
 
 		moveCursor("up", 7);
 		moveCursor("right", 7); //NOTE: For some reason, the blood and water drops take up two spaces? And moving right by 0 moves the cursor by one? I think.
-		for (int i = 1; i < scene.length()-1; i++) {
-			
-		}
+		String frame = scene;
+
+		System.out.println();
+		System.out.print(frame);
+		System.out.println();
+		//for (int i = 1; i < scene.length()-2; i++) {
+		//	frame = scene.substring(0,i) + "o" + scene.substring(i+1, scene.length());
+		//	System.out.print(frame);
+		//	moveCursor("left", scene.length()-1);
+		//	try {
+		//		TimeUnit.MILLISECONDS.sleep(50);
+		//	} catch (InterruptedException e) {
+		//	}
+		//}
 		
 	}
 

@@ -5,6 +5,7 @@ public class TestStuff {
 		//String stringOutsideFunction;
 		tester.modifyStringOutsideFunction(); //Cannot modify variable that is not passed into function
 		tester.printTextInColor();
+		tester.testSubstring();
 
 		tester.testAssigningStringOnMultipleLines();
 
@@ -13,6 +14,7 @@ public class TestStuff {
 		
 		int count = tester.countSubstr("hello mellow jello elll elelelleell", "ell");
 		System.out.println("Count of substring is: " + count);
+
 	}
 
 	public int countSubstr(String outerString, String substring) {
@@ -69,4 +71,11 @@ public class TestStuff {
 		String ANSI_RED = "\u001B[31m";
 		System.out.println(ANSI_RED + "This is red ... hopefully haha." + ANSI_RESET);
 	}
+	public void testSubstring() {
+		String testString = "1234567890";
+		System.out.println(testString.substring(0,0));
+		System.out.println(testString.substring(0,5));
+		System.out.println(testString.substring(5,10));
+	}
+
 }
