@@ -493,6 +493,53 @@ public class Combat {
 	public String makeYellow(String text) {
 		return ANSI_YELLOW + text + ANSI_RESET;
 	}
+
+	public String colored(String color, String text) {
+
+		final String ANSI_RESET = "\u001B[0m";
+		final String ANSI_BLACK = "\u001B[30m";
+		final String ANSI_RED = "\u001B[31m";
+		final String ANSI_GREEN = "\u001B[32m";
+		final String ANSI_YELLOW = "\u001B[33m";
+		final String ANSI_BLUE = "\u001B[34m";
+		final String ANSI_PURPLE = "\u001B[35m";
+		final String ANSI_CYAN = "\u001B[36m";
+		final String ANSI_WHITE = "\u001B[37m";
+
+		String ansiColorCode;
+		String ansiResetCode = ANSI_RESET;
+		switch (color) {
+			case "black":
+				ansiColorCode = ANSI_BLACK;
+				break;
+			case "red":
+				ansiColorCode = ANSI_RED;
+				break;
+			case "green":
+				ansiColorCode = ANSI_GREEN;
+				break;
+			case "yellow":
+				ansiColorCode = ANSI_YELLOW;
+				break;
+			case "blue":
+				ansiColorCode = ANSI_BLUE;
+				break;
+			case "purple":
+				ansiColorCode = ANSI_PURPLE;
+				break;
+			case "cyan":
+				ansiColorCode = ANSI_CYAN;
+				break;
+			case "white":
+				ansiColorCode = ANSI_WHITE;
+				break;
+			default:
+				break;
+		}
+		//QUESTION: += is shorthand for adding at end of string, but what is 
+		//shorthand for adding at front of string?
+		return ansiColorCode + text + ansiResetCode;
+	}
 	//add broken heart for damage
 	//add fire and shield for attack and block, and add water thing for mana regen
 

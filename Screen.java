@@ -47,16 +47,16 @@ public class Screen {
 			String result;
 			switch (icon) {
 				case "p1":
-					this.result = p1Avatar;
+					result = this.p1Avatar;
 					break;
 				case "p2":
-					this.result = p2Avatar;
+					result = this.p2Avatar;
 					break;
 				case "health":
-					this.result = health;
+					result = this.health;
 					break;
 				case "mana":
-					this.result = mana;
+					result = this.mana;
 					break;
 				default:
 					break;
