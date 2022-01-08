@@ -47,16 +47,16 @@ public class Screen {
 			String result;
 			switch (icon) {
 				case "p1":
-					result = p1Avatar;
+					this.result = p1Avatar;
 					break;
 				case "p2":
-					result = p2Avatar;
+					this.result = p2Avatar;
 					break;
 				case "health":
-					result = health;
+					this.result = health;
 					break;
 				case "mana":
-					result = mana;
+					this.result = mana;
 					break;
 				default:
 					break;
@@ -65,6 +65,42 @@ public class Screen {
 
 		private Character player1;
 		private Character player2;
+
+		public boolean setCharacter(String type, Character characterObject) {
+
+			boolean success;
+			switch (type) {
+				case "p1":
+					this.player1 = characterObject;
+					success = true;
+					break;
+				case "p2":
+					this.player2 = characterObject;
+					//QUESTION: Is using the "this" keyword good practice? I assume so.
+					success = true;
+					break;
+				default:
+					success = false;
+					break;
+			}
+		}
+		public void getCharacter(String type) {
+			
+			Character result;
+			switch (type) {
+				case "p1":
+					result = this.player1;
+					break
+				case "p2":
+					result = this.player2;
+					break
+
+				default:
+					break;
+			}
+
+			return result;
+		}
 
 		private String p1ActionStatus = p1Avatar + ": <no action yet>";
 		private String p2ActionStatus = p2Avatar + ": <no action yet>";
