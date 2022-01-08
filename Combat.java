@@ -118,7 +118,7 @@ public class Combat {
 
 
 			//Add animation after printing to the screen
-			animate(numOfLines, screenToPrint);
+			//animate(numOfLines, screenToPrint);
 
 
 		} 
