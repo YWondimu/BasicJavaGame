@@ -10,7 +10,6 @@ The game is run in the terminal, and might or might not include a GUI... It's a 
 
 Here's a screenshot to give an idea of how the game looks, for now:
 
-![screenshot of game start screen](/PicturesForReadme/Screen Shot 2022-01-23 at 8.33.14 PM.png "Screenshot of Game")
+![screenshot of game start screen](/PicturesForReadme/Screen%20Shot%202022-01-23%20at%208.32.09%20PM.png "Screenshot of Game")
 
-![screenshot of game in action](/PicturesForReadme/Screen Shot 2022-01-23 at 8.32.09 PM.png "Screenshot of Game")
-
+![screenshot of game in action](/PicturesForReadme/Screen%20Shot%202022-01-23%20at%208.33.14%20PM.png "Screenshot of Game")
