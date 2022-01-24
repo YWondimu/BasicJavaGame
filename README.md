@@ -3,10 +3,10 @@
 This is a very basic, terminal-based game written in java. The purpose of making this game is:
 
 1) To develop my programming ability.
-2) To learn more about how collaborative programming works through practice. (Currently, I am the only one working on this game.)
+2) To learn more about how collaborative programming works through practice. (But currently, I am the only one working on this game.)
 3) To make something cool!
 
-The game is run in the terminal, but in the future might GUI... It's a work in progress, so I'll add more in here as features develop haha.
+The game is run in the terminal, but in the future might use a GUI... It's a work in progress, so I'll add more in here as features develop haha.
 
 Below are some screenshots to give an idea of how the game looks, for now:
 
