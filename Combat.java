@@ -94,7 +94,7 @@ public class Combat {
 		numOfLines = countSubstr(screenToPrint, "\n") + 2;
 		System.out.print(screenToPrint);
 
-		while (player1.getHealth() * enemy.getHealth() > 0) { //keep going as long as both have health > 0
+		while (player1.getHealth() * enemy.getHealth() > 0 && !usersOption.equals("q")) { //keep going as long as both have health > 0
 
 			//TODO: The print methods should return strings instead of printing them
 			//TODO: I should use "\n" in the strings and use print not println, that way I can count 
@@ -106,19 +106,21 @@ public class Combat {
  			usersOption = getUsersOption();
 			enemysOption = getEnemysOption();
 
-			//modify objects
-			modifyObjects(usersOption, enemysOption);
+			if (!usersOption.equals("q")) {
+				//modify objects
+				modifyObjects(usersOption, enemysOption);
 
-			//process and print output
-			//TODO: Modularize - split processing input and printing output
-			//TODO: Minor priority - make the bottom 3 lines into 1 function?
-			screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
-			numOfLines = countSubstr(screenToPrint, "\n") + 2;
-			System.out.print(screenToPrint);
+				//process and print output
+				//TODO: Modularize - split processing input and printing output
+				//TODO: Minor priority - make the bottom 3 lines into 1 function?
+				screenToPrint = getScreen(numOfLines, usersOption, enemysOption);
+				numOfLines = countSubstr(screenToPrint, "\n") + 2;
+				System.out.print(screenToPrint);
 
 
-			//Add animation after printing to the screen
-			//animate(numOfLines, screenToPrint);
+				//Add animation after printing to the screen
+				//animate(numOfLines, screenToPrint);
+			}
 
 
 		} 
@@ -126,7 +128,10 @@ public class Combat {
 
 		//TODO: Make the below lines relating to win/lost status into one function
 		//determine winner
-		if (player1.getHealth() > enemy.getHealth()) {
+		if (usersOption.equals("q")) {
+			usersOption = "quit";
+			enemysOption = "";
+		} else if (player1.getHealth() > enemy.getHealth()) {
 			usersOption = "won";
 			enemysOption = "lost";
 		} else if (player1.getHealth() < enemy.getHealth()) {
@@ -159,7 +164,7 @@ public class Combat {
 		boolean inputIsValid = false;
 		while (!inputIsValid) {
 			usersOption = scan.nextLine();
-			if (usersOption.equals("a") || usersOption.equals("s") || usersOption.equals("d")) {
+			if (usersOption.equals("a") || usersOption.equals("s") || usersOption.equals("d") || usersOption.equals("q")) {
 				inputIsValid = true;
 			} else {
 				System.out.print("\033[F          \r");
@@ -421,7 +426,7 @@ public class Combat {
 	}
 
 	public String getMenu() {
-		String menu = "a: " + makeRed("attack") + " | s: " + makeCyan("charge mana") + " | d: " + makeYellow("defend");
+		String menu = "a: " + makeRed("attack") + " | s: " + makeCyan("charge mana") + " | d: " + makeYellow("defend") + " | q: quit";
 
 		return menu;
 	}
@@ -457,6 +462,8 @@ public class Combat {
 			output = firstHalf + "lost.";
 		} else if (what == "tied") {
 			output = firstHalf + "tied!";
+		} else if (what == "quit") {
+			output = "You have quit the game.";
 		} else if (what == "n/a") {
 			output = firstHalf + "... waiting for action.";
 		}
@@ -506,7 +513,7 @@ public class Combat {
 		final String ANSI_CYAN = "\u001B[36m";
 		final String ANSI_WHITE = "\u001B[37m";
 
-		String ansiColorCode;
+		String ansiColorCode = "";
 		String ansiResetCode = ANSI_RESET;
 		switch (color) {
 			case "black":
