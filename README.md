@@ -8,7 +8,7 @@ This is a very basic, terminal-based game written in java. The purpose of making
 2) To learn more about how collaborative programming works through practice. (But currently, I am the only one working on this game.)
 3) To make something cool!
 
-The game is run in the terminal, but in the future might use a GUI... It's a work in progress, so I'll add more in here as features develop haha.
+The game is run in the terminal, but in the future might use a GUI... It's a work in progress, so I will update this README as I add more features. (But I might not add more features. See "Features to Add" section!)
 
 ## Screenshots
 
@@ -20,7 +20,7 @@ Below are some screenshots to give an idea of how the game looks, for now:
 
 ## Installation
 
-To run and play the game you will need to have java installed on your computer.
+To run and play the game you will need to have Java installed on your computer.
 You can then make a folder somewhere (e.g. called "BasicJavaGame") and clone this git repository into it.
 
 `git clone https://github.com/YWondimu/BasicJavaGame/`
@@ -33,12 +33,12 @@ The following command starts the game.
 
 ## Quitting the Game
 
-To quit the game after having started, type "q", then press enter.
+To quit the game, type "q", then press enter.
 
 ## Game Rules and Gameplay
 
 Both Player 1 and the Enemy NPC have 5 lives, and 5 units of mana.
-The aim of the game is to bring the NPC's lives down to 0, without losing all 5 of your own lives yourself.
+The aim of the game is to bring the NPC's lives down to 0, without losing all 5 of your own lives.
 
 Each turn you can do 1 of 3 things:
 - attack
@@ -56,7 +56,7 @@ Each attack uses up 1 unit of your mana.
 ### Recharching Mana
 
 To recharge mana, type "s", then press enter.
-Each attack uses 1 unit of mana. If you do not have any mana, you cannot attack.
+Each attack uses 1 unit of mana. If you do not have any mana, your attack will not cause any damage to the Enemy NPC.
 
 ### Defending
 
